@@ -1,0 +1,2 @@
+USE creatinet;
+DESCRIBE proyectos;

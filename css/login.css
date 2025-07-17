@@ -1,0 +1,259 @@
+/* Estilos para la página de Login */
+:root {
+    --primary-gradient-start: #667eea; /* Azul claro */
+    --primary-gradient-end: #872081;   /* Púrpura (actualizado) */
+
+    --icon-gradient-red: #ff6b6b;
+    --icon-gradient-yellow: #ffd93d;
+    --icon-gradient-green: #6bcf7f;
+
+    --pure-white: #ffffff;
+    --soft-white: #f0f0f0;
+    --light-gray: #f8f9fa;
+    --dark-gray: #333333;
+
+    --white-80-opacity: rgba(255,255,255,0.8);
+    --white-40-opacity: rgba(255,255,255,0.4);
+    --white-30-opacity: rgba(255,255,255,0.3);
+    --white-10-opacity: rgba(255,255,255,0.1);
+    --white-8-opacity: rgba(255,255,255,0.08);
+    --white-6-opacity: rgba(255,255,255,0.06);
+
+    /* Colores derivados para uso general en UI */
+    --main-color: var(--primary-gradient-end); /* Púrpura como color principal */
+    --secondary-color: var(--primary-gradient-start); /* Azul claro como color secundario/acento */
+    --text-color: var(--dark-gray);
+    --background-color: var(--light-gray);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+}
+
+.container {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background: var(--pure-white);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    text-align: center;
+    animation: fadeInScale 0.6s ease-out;
+}
+
+h1, h2 {
+    color: var(--main-color);
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] { /* Añadido para consistencia si se usa en otros formularios */
+    padding: 15px;
+    border: 1px solid var(--medium-gray);
+    border-radius: 10px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--light-gray);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2); /* Púrpura con 20% de opacidad */
+}
+
+input[type="submit"] {
+    padding: 15px;
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+    color: var(--pure-white);
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px var(--shadow-light);
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--primary-gradient-end) 0%, var(--primary-gradient-start) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-medium);
+}
+
+input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+.olvido-password,
+.crear-cuenta {
+    margin-top: 25px;
+    font-size: 0.95em;
+}
+
+.olvido-password a,
+.crear-cuenta a {
+    color: var(--main-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.olvido-password a:hover,
+.crear-cuenta a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+.crear-cuenta {
+    padding-top: 20px;
+    border-top: 1px solid var(--medium-gray);
+}
+
+.crear-cuenta p {
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.crear-cuenta a.button {
+    display: inline-block;
+    padding: 12px 25px;
+    background: var(--secondary-color);
+    color: var(--pure-white);
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+.crear-cuenta a.button:hover {
+    background: var(--main-color);
+    transform: translateY(-2px);
+}
+
+.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #f5c6cb;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Animaciones */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex; /* Show when .show class is added */
+}
+
+.modal-contenido {
+    background-color: var(--pure-white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-medium);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: fadeInScale 0.3s ease-out;
+}
+
+.modal-contenido h2 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.modal-contenido .close-button {
+    color: var(--dark-gray);
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.modal-contenido .close-button:hover,
+.modal-contenido .close-button:focus {
+    color: var(--main-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Restablecer password */
+.mensaje {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #d4edda; /* Light green for success */
+    border: 1px solid #28a745;
+    color: #155724;
+    text-align: center;
+    font-weight: 500;
+}
+
+.volver {
+    text-decoration: none;
+    color: var(--main-color);
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.volver:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}

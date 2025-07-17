@@ -1,0 +1,1 @@
+ALTER TABLE proyectos ADD programas_usados VARCHAR(255) NULL;

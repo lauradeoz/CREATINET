@@ -1,6 +1,6 @@
 <?php
-include_once __DIR__ . '/../data/ususarioDB.php';
-require_once __DIR__ . '/../config/database.php';
+include_once __DIR__ . '/data/ususarioDB.php';
+require_once __DIR__ . '/config/database.php';
 
 $database = new Database();
 $usuarioDB = new UsuarioDB($database);

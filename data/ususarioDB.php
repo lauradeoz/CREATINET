@@ -98,17 +98,21 @@ class UsuarioDB {
         if(!$existe){
             if($stmt->execute()){
                 // correcto
-                $mensaje_email = "Por favor, verifica tu cuenta haciendo clic en este enlace: $this->url../verificar.php?token=$token";
-                $mensaje = Correo::enviarCorreo($email, "Cliente", "Verificación de cuenta", $mensaje_email);
-                // $mensaje = $this->enviarCorreoSimulado($email, "Verificación de cuenta", $mensaje);
+                $mensaje_email = "Por favor, verifica tu cuenta haciendo clic en este enlace: " . URL_ADMIN . "verificar.php?token=$token";
+                $correoEnviado = Correo::enviarCorreo($email, "Cliente", "Verificación de cuenta", $mensaje_email);
+                if ($correoEnviado['success']) {
+                    $resultado = ["success" => true, "mensaje" => "Registro exitoso. Por favor, verifica tu correo."];
+                } else {
+                    $resultado = ["success" => false, "mensaje" => "Registro exitoso, pero hubo un error al enviar el correo de verificación: " . $correoEnviado['mensaje']];
+                }
             }else{
-                $mensaje = ["success" => false, "mensaje" => "Error en el registro: " . $stmt->error];
+                $resultado = ["success" => false, "mensaje" => "Error en el registro: " . $stmt->error];
             }
         }else{
-            $mensaje = ["success" => false, "mensaje" => "Ya existe una cuenta con ese email"];
+            $resultado = ["success" => false, "mensaje" => "Ya existe una cuenta con ese email"];
         }
 
-        return $mensaje;
+        return $resultado;
     }
 
     /**

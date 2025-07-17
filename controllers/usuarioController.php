@@ -70,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"
 }
 
 
-function redirigirConMensaje($url, $success, $mensaje){
+function redirigirConMensaje($url, $success, $mensaje = ''){
     //almacena el resultado en la variable de sesion
     $_SESSION['success'] = $success;
     $_SESSION['mensaje'] = $mensaje;

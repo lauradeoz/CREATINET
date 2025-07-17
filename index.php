@@ -184,7 +184,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                         <strong>Programas Usados:</strong>
                         <?php
                         if (!empty($proyecto['programas_usados'])) {
-                            $programas = explode(', ', $proyecto['programas']);
+                            $programas = explode(', ', $proyecto['programas_usados']);
                             foreach ($programas as $programa) {
                                 echo '<img src="' . htmlspecialchars($programa) . '" alt="' . htmlspecialchars(basename($programa, '.png')) . '" class="programa-logo">';
                             }
@@ -219,5 +219,33 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
             }
         });
     </script>
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>CREATINET</h3>
+                <p>Conectando mentes creativas. Tu portfolio, tu comunidad.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="login.php">Login</a></li>
+                    <li><a href="#">Privacidad</a></li>
+                    <li><a href="#">Términos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section social">
+                <h3>Síguenos</h3>
+                <p>
+                    <a href="#">Facebook</a> |
+                    <a href="#">Twitter</a> |
+                    <a href="#">Instagram</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; <?php echo date("Y"); ?> CREATINET. Todos los derechos reservados.
+        </div>
+    </footer>
 </body>
 </html>

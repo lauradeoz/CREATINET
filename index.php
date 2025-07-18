@@ -1,5 +1,7 @@
 <?php
-session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
 
 // Obtener la URI de la solicitud
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -163,10 +165,6 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                             }
                         }
                         ?>
-                    </div>
-                    <div class="likes">
-                        <button class="like-btn" data-id="<?php echo $proyecto['id']; ?>">Like</button>
-                        <span class="likes-count"><?php echo $proyecto['favorito']; ?></span>
                     </div>
                     <div class="project-actions">
                         <button class="edit-btn" data-id="<?php echo $proyecto['id']; ?>" data-titulo="<?php echo htmlspecialchars($proyecto['titulo']); ?>" data-descripcion="<?php echo htmlspecialchars($proyecto['descripcion']); ?>" data-archivo="<?php echo htmlspecialchars($proyecto['archivo']); ?>" data-programas="<?php echo htmlspecialchars($proyecto['programas_usados']); ?>">Editar</button>

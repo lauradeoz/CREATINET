@@ -1,17 +1,23 @@
 /* Estilos para la página de Login */
-:root {
-    --primary-gradient-start: #667eea; /* Azul claro */
-    --primary-gradient-end: #872081;   /* Púrpura (actualizado) */
 
+/* Variables CSS para colores y sombras, facilitando la consistencia y el cambio de tema. */
+:root {
+    --primary-gradient-start: #667eea; /* Azul claro, usado en gradientes */
+    --primary-gradient-end: #872081;   /* Púrpura, usado en gradientes y como color principal */
+
+    /* Colores específicos para gradientes de iconos o elementos destacados */
     --icon-gradient-red: #ff6b6b;
     --icon-gradient-yellow: #ffd93d;
-    --icon-gradient-green: #6bcf7f;
+    --icon-gradient-green: #6bcf7f; /* Verde */
 
+    /* Colores base para el diseño */
     --pure-white: #ffffff;
     --soft-white: #f0f0f0;
     --light-gray: #f8f9fa;
     --dark-gray: #333333;
+    --medium-gray: #ced4da; /* Añadido para bordes de input */
 
+    /* Colores blancos con diferentes niveles de opacidad para fondos y superposiciones */
     --white-80-opacity: rgba(255,255,255,0.8);
     --white-40-opacity: rgba(255,255,255,0.4);
     --white-30-opacity: rgba(255,255,255,0.3);
@@ -19,241 +25,270 @@
     --white-8-opacity: rgba(255,255,255,0.08);
     --white-6-opacity: rgba(255,255,255,0.06);
 
-    /* Colores derivados para uso general en UI */
-    --main-color: var(--primary-gradient-end); /* Púrpura como color principal */
+    /* Colores derivados para uso general en la interfaz de usuario */
+    --main-color: var(--primary-gradient-end);    /* Púrpura como color principal */
     --secondary-color: var(--primary-gradient-start); /* Azul claro como color secundario/acento */
-    --text-color: var(--dark-gray);
-    --background-color: var(--light-gray);
+    --text-color: var(--dark-gray);               /* Color principal para el texto */
+    --background-color: var(--light-gray);        /* Color de fondo general */
+
+    /* Sombras predefinidas para elementos con elevación */
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
 }
 
+/* Reseteo básico de CSS para eliminar márgenes y paddings por defecto del navegador. */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto total del elemento */
 }
 
+/* Estilos para el cuerpo de la página de login */
 body {
-    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* Fuente principal */
+    /* Fondo con gradiente lineal para un aspecto moderno */
     background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
     margin: 0;
     padding: 20px;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-color);
+    height: 100vh; /* Ocupa el 100% de la altura del viewport */
+    display: flex; /* Usa flexbox para centrar el contenido */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    color: var(--text-color); /* Color de texto general */
 }
 
+/* Estilos para el contenedor principal del formulario de login/registro */
 .container {
-    width: 100%;
-    max-width: 450px;
-    padding: 40px;
-    background: var(--pure-white);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-medium);
-    text-align: center;
-    animation: fadeInScale 0.6s ease-out;
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 450px; /* Ancho máximo para el contenedor */
+    padding: 40px; /* Espaciado interno */
+    background: var(--pure-white); /* Fondo blanco */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 10px 30px var(--shadow-medium); /* Sombra pronunciada */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    animation: fadeInScale 0.6s ease-out; /* Animación de aparición */
 }
 
 h1, h2 {
-    color: var(--main-color);
-    margin-bottom: 30px;
-    font-size: 2.2em;
-    font-weight: 700;
+    color: var(--main-color); /* Color principal */
+    margin-bottom: 30px; /* Margen inferior */
+    font-size: 2.2em; /* Tamaño de fuente */
+    font-weight: 700; /* Negrita */
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: flex; /* Usa flexbox para organizar los campos */
+    flex-direction: column; /* Campos en columna */
+    gap: 20px; /* Espacio entre los campos */
 }
 
+/* Estilos para los campos de entrada de texto, email y contraseña */
 input[type="email"],
 input[type="password"],
 input[type="text"] { /* Añadido para consistencia si se usa en otros formularios */
-    padding: 15px;
-    border: 1px solid var(--medium-gray);
-    border-radius: 10px;
-    font-size: 1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--light-gray);
+    padding: 15px; /* Espaciado interno */
+    border: 1px solid var(--medium-gray); /* Borde gris */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    background-color: var(--light-gray); /* Fondo gris claro */
 }
 
+/* Estilos para los campos de entrada cuando están en foco */
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus {
-    outline: none;
-    border-color: var(--main-color);
-    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2); /* Púrpura con 20% de opacidad */
+    outline: none; /* Elimina el contorno por defecto */
+    border-color: var(--main-color); /* Borde de color principal */
+    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2); /* Sombra de foco (púrpura con opacidad) */
 }
 
+/* Estilos para el botón de envío (submit) */
 input[type="submit"] {
-    padding: 15px;
+    padding: 15px; /* Espaciado interno */
+    /* Fondo con gradiente lineal */
     background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
-    color: var(--pure-white);
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    box-shadow: 0 5px 15px var(--shadow-light);
+    color: var(--pure-white); /* Color de texto blanco */
+    border: none; /* Sin borde */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 1.1em; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    cursor: pointer; /* Cursor de puntero */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    box-shadow: 0 5px 15px var(--shadow-light); /* Sombra */
 }
 
+/* Estilos para el botón de envío al pasar el ratón */
 input[type="submit"]:hover {
+    /* Gradiente invertido al pasar el ratón */
     background: linear-gradient(135deg, var(--primary-gradient-end) 0%, var(--primary-gradient-start) 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px var(--shadow-medium);
+    transform: translateY(-2px); /* Ligero desplazamiento hacia arriba */
+    box-shadow: 0 8px 20px var(--shadow-medium); /* Sombra más pronunciada */
 }
 
+/* Estilos para el botón de envío al hacer clic */
 input[type="submit"]:active {
-    transform: translateY(0);
+    transform: translateY(0); /* Vuelve a la posición original */
 }
 
+/* Estilos para las secciones de "Olvidó contraseña" y "Crear cuenta" */
 .olvido-password,
 .crear-cuenta {
-    margin-top: 25px;
-    font-size: 0.95em;
+    margin-top: 25px; /* Margen superior */
+    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
 }
 
+/* Estilos para los enlaces dentro de estas secciones */
 .olvido-password a,
 .crear-cuenta a {
-    color: var(--main-color);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    color: var(--main-color); /* Color principal */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: 600; /* Negrita */
+    transition: color 0.3s ease; /* Transición suave para el color */
 }
 
+/* Estilos para los enlaces al pasar el ratón */
 .olvido-password a:hover,
 .crear-cuenta a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
+    color: var(--secondary-color); /* Cambio de color */
+    text-decoration: underline; /* Subrayado */
 }
 
+/* Estilos específicos para la sección "Crear cuenta" */
 .crear-cuenta {
-    padding-top: 20px;
-    border-top: 1px solid var(--medium-gray);
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid var(--medium-gray); /* Borde superior para separar */
 }
 
 .crear-cuenta p {
-    margin-bottom: 15px;
-    color: var(--text-color);
+    margin-bottom: 15px; /* Margen inferior */
+    color: var(--text-color); /* Color de texto */
 }
 
+/* Estilos para el botón de "Crear cuenta" (si se usa como enlace con clase button) */
 .crear-cuenta a.button {
-    display: inline-block;
-    padding: 12px 25px;
-    background: var(--secondary-color);
-    color: var(--pure-white);
-    border-radius: 10px;
-    font-size: 1em;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px var(--shadow-light);
+    display: inline-block; /* Se comporta como un bloque pero en línea */
+    padding: 12px 25px; /* Espaciado interno */
+    background: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    box-shadow: 0 4px 10px var(--shadow-light); /* Sombra */
 }
 
 .crear-cuenta a.button:hover {
-    background: var(--main-color);
-    transform: translateY(-2px);
+    background: var(--main-color); /* Cambio de color al pasar el ratón */
+    transform: translateY(-2px); /* Ligero desplazamiento hacia arriba */
 }
 
+/* Estilos para mensajes de error */
 .error {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 12px;
-    border-radius: 8px;
-    margin-top: 20px;
-    border: 1px solid #f5c6cb;
-    text-align: center;
-    font-weight: 500;
+    background-color: #f8d7da; /* Fondo rojo claro */
+    color: #721c24; /* Color de texto rojo oscuro */
+    padding: 12px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-top: 20px; /* Margen superior */
+    border: 1px solid #f5c6cb; /* Borde rojo */
+    text-align: center; /* Centra el texto */
+    font-weight: 500; /* Negrita */
 }
 
 /* Animaciones */
 @keyframes fadeInScale {
     from {
-        opacity: 0;
-        transform: scale(0.9);
+        opacity: 0; /* Invisible */
+        transform: scale(0.9); /* Ligeramente más pequeño */
     }
     to {
-        opacity: 1;
-        transform: scale(1);
+        opacity: 1; /* Completamente visible */
+        transform: scale(1); /* Tamaño normal */
     }
 }
 
-/* Modal */
+/* Estilos para los modales (ventanas emergentes) */
 .modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1000; /* Sit on top */
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1000; /* Por encima de otros elementos */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
-    align-items: center;
-    justify-content: center;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgba(0,0,0,0.6); /* Fondo negro semi-transparente */
+    display: flex; /* Usa flexbox para centrar el contenido del modal */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
 }
 
+/* Clase para mostrar el modal */
 .modal.show {
-    display: flex; /* Show when .show class is added */
+    display: flex; /* Muestra el modal cuando se añade esta clase */
 }
 
+/* Estilos para el contenido del modal */
 .modal-contenido {
-    background-color: var(--pure-white);
-    margin: auto;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px var(--shadow-medium);
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    animation: fadeInScale 0.3s ease-out;
+    background-color: var(--pure-white); /* Fondo blanco */
+    margin: auto; /* Centra el contenido */
+    padding: 30px; /* Espaciado interno */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 10px 30px var(--shadow-medium); /* Sombra pronunciada */
+    width: 90%; /* Ancho del 90% */
+    max-width: 500px; /* Ancho máximo */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+    animation: fadeInScale 0.3s ease-out; /* Animación de aparición */
 }
 
+/* Estilos para los títulos (h2) dentro del modal */
 .modal-contenido h2 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.8em;
+    margin-top: 0; /* Elimina el margen superior por defecto */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.8em; /* Tamaño de fuente */
 }
 
+/* Estilos para el botón de cerrar el modal */
 .modal-contenido .close-button {
-    color: var(--dark-gray);
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 35px;
-    font-weight: bold;
-    transition: color 0.3s ease;
+    color: var(--dark-gray); /* Color de texto */
+    position: absolute; /* Posicionamiento absoluto */
+    top: 15px; /* 15px desde el borde superior */
+    right: 25px; /* 25px desde el borde derecho */
+    font-size: 35px; /* Tamaño de fuente grande */
+    font-weight: bold; /* Negrita */
+    transition: color 0.3s ease; /* Transición suave para el color */
 }
 
+/* Estilos para el botón de cerrar al pasar el ratón o enfocar */
 .modal-contenido .close-button:hover,
 .modal-contenido .close-button:focus {
-    color: var(--main-color);
-    text-decoration: none;
-    cursor: pointer;
+    color: var(--main-color); /* Cambio de color */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
 }
 
-/* Restablecer password */
+/* Estilos para mensajes de restablecimiento de contraseña */
 .mensaje {
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 10px;
-    background-color: #d4edda; /* Light green for success */
-    border: 1px solid #28a745;
-    color: #155724;
-    text-align: center;
-    font-weight: 500;
+    padding: 15px; /* Espaciado interno */
+    margin-bottom: 20px; /* Margen inferior */
+    border-radius: 10px; /* Bordes redondeados */
+    background-color: #d4edda; /* Fondo verde claro para éxito */
+    border: 1px solid #28a745; /* Borde verde */
+    color: #155724; /* Color de texto verde oscuro */
+    text-align: center; /* Centra el texto */
+    font-weight: 500; /* Negrita */
 }
 
+/* Estilos para el enlace "Volver" */
 .volver {
-    text-decoration: none;
-    color: var(--main-color);
-    font-weight: 600;
-    transition: color 0.3s ease;
+    text-decoration: none; /* Sin subrayado */
+    color: var(--main-color); /* Color principal */
+    font-weight: 600; /* Negrita */
+    transition: color 0.3s ease; /* Transición suave para el color */
 }
 
+/* Estilos para el enlace "Volver" al pasar el ratón */
 .volver:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
+    color: var(--secondary-color); /* Cambio de color */
+    text-decoration: underline; /* Subrayado */
 }

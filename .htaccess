@@ -1,6 +1,27 @@
+# .htaccess
+# Este archivo de configuración de Apache se utiliza para controlar
+# el comportamiento del servidor web para este directorio y sus subdirectorios.
+# En este caso, se configura la reescritura de URLs para un enrutamiento "limpio".
+
+# Activa el motor de reescritura de URLs.
 RewriteEngine On
+
+# Define la base de la URL para las reglas de reescritura.
+# Es la ruta relativa desde la raíz del servidor web hasta el directorio de tu proyecto.
+# Asegúrate de que coincida con la configuración de tu servidor (ej. si está en un subdirectorio).
 RewriteBase /CREATINET/
 
+# --- Reglas de reescritura ---
+# Estas reglas se aplican a todas las solicitudes que no corresponden a archivos o directorios reales.
+
+# Condición: Verifica que la solicitud NO sea para un archivo existente.
 RewriteCond %{REQUEST_FILENAME} !-f
+# Condición: Verifica que la solicitud NO sea para un directorio existente.
 RewriteCond %{REQUEST_FILENAME} !-d
+# Regla: Si las dos condiciones anteriores son verdaderas, reescribe la URL.
+# ^(.*)$ : Captura toda la URL solicitada.
+# index.php : La reescribe para que apunte a index.php.
+# [QSA,L] :
+#   - QSA (Query String Append): Añade cualquier cadena de consulta existente a la nueva URL.
+#   - L (Last): Indica que es la última regla a procesar si coincide.
 RewriteRule ^(.*)$ index.php [QSA,L]

@@ -1,19 +1,4116 @@
+/* Estilos generales */
+/* Define variables CSS para colores y sombras, facilitando la consistencia y el cambio de tema. */
+:root {
+    --primary-gradient-start: #667eea; /* Azul claro, usado en gradientes */
+    --primary-gradient-end: #872081;   /* Púrpura, usado en gradientes y como color principal */
+
+    /* Colores específicos para gradientes de iconos o elementos destacados */
+    --icon-gradient-red: #ff6b6b;
+    --icon-gradient-yellow: #ffd93d;
+    --icon-gradient-green: #7f3ca3; /* Este color parece ser un púrpura oscuro, no verde */
+
+    /* Colores base para el diseño */
+    --pure-white: #ffffff;
+    --soft-white: #f0f0f0;
+    --light-gray: #f8f9fa;
+    --dark-gray: #333333;
+
+    /* Colores blancos con diferentes niveles de opacidad para fondos y superposiciones */
+    --white-80-opacity: rgba(255,255,255,0.8);
+    --white-40-opacity: rgba(255,255,255,0.4);
+    --white-30-opacity: rgba(255,255,255,0.3);
+    --white-10-opacity: rgba(255,255,255,0.1);
+    --white-8-opacity: rgba(255,255,255,0.08);
+    --white-6-opacity: rgba(255,255,255,0.06);
+
+    /* Colores derivados para uso general en UI */
+    --main-color: var(--primary-gradient-end);    /* Púrpura como color principal */
+    --secondary-color: var(--primary-gradient-start); /* Azul claro como color secundario/acento */
+    --text-color: var(--dark-gray);               /* Color principal para el texto */
+    --background-color: var(--light-gray);        /* Color de fondo general */
+
+    /* Sombras predefinidas para elementos con elevación */
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+/* Reseteo básico de CSS para eliminar márgenes y paddings por defecto del navegador. */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto total del elemento */
+}
+
+/* Estilos para el cuerpo de la página (body) */
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* Fuente principal */
+    background-image: url('../img/FONDO.jpg'); /* Imagen de fondo */
+    background-size: cover; /* Cubre todo el área */
+    background-position: center; /* Centra la imagen de fondo */
+    background-attachment: fixed; /* Fija la imagen de fondo al viewport */
+    margin: 0;
+    padding: 20px;
+    padding-top: 60px; /* Añadir padding superior para dejar espacio a la info de usuario */
+    color: var(--text-color); /* Color de texto general */
+    line-height: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+}
+
+/* Estilos para el contenedor de información del usuario en la esquina superior derecha */
+#user-info-top-right {
+    position: absolute; /* Posicionamiento absoluto respecto al body */
+    top: 20px;          /* 20px desde el borde superior */
+    right: 20px;        /* 20px desde el borde derecho */
+    z-index: 1000;      /* Asegura que esté por encima de otros elementos */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+#user-info-top-right p {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+    color: var(--dark-gray); /* Color de texto */
+    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
+}
+
+#user-info-top-right a {
+    color: var(--main-color); /* Color del enlace */
+    font-weight: 600; /* Texto en negrita */
+}
+
+#user-info-top-right a:hover {
+    color: var(--secondary-color); /* Cambio de color al pasar el ratón */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+.container {
+    max-width: 1200px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px; /* Espaciado interno */
+    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con 90% de opacidad */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 20px var(--shadow-light); /* Sombra para dar profundidad */
+}
+
+h1 {
+    text-align: center; /* Centra el texto */
+    color: var(--main-color); /* Color principal */
+    margin-bottom: 30px; /* Margen inferior */
+    font-size: 2.8em; /* Tamaño de fuente grande */
+    font-weight: 700; /* Negrita */
+    letter-spacing: -0.5px; /* Espaciado entre letras */
+}
+
+h2 {
+    text-align: center; /* Centra el texto */
+    color: var(--text-color); /* Color de texto */
+    margin-top: 40px; /* Margen superior */
+    margin-bottom: 25px; /* Margen inferior */
+    font-size: 2em; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+}
+
+p {
+    margin-bottom: 15px; /* Margen inferior para separar párrafos */
+}
+
+a {
+    color: var(--main-color); /* Color principal */
+    text-decoration: none; /* Sin subrayado por defecto */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+a:hover {
+    color: var(--secondary-color); /* Cambio de color al pasar el ratón */
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+}
+
+/* Mensajes de error/éxito */
+.error-message {
+    color: #dc3545; /* Color de texto rojo */
+    background-color: #f8d7da; /* Fondo rojo claro */
+    border: 1px solid #f5c6cb; /* Borde rojo */
+    padding: 12px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 20px; /* Margen inferior */
+    text-align: center; /* Centra el texto */
+}
+
+/* Botones generales */
+button {
+    background-color: var(--main-color); /* Color de fondo principal */
+    color: var(--pure-white); /* Color de texto blanco */
+    border: none; /* Sin borde */
+    padding: 12px 25px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero al pasar el ratón */
+    font-size: 1em; /* Tamaño de fuente */
+    font-weight: 600; /* Negrita */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    box-shadow: 0 4px 10px var(--shadow-light); /* Sombra */
+}
+
+button:hover {
+    background-color: var(--secondary-color); /* Cambio de color al pasar el ratón */
+    transform: translateY(-2px); /* Ligero desplazamiento hacia arriba */
+}
+
+button:active {
+    transform: translateY(0); /* Vuelve a la posición original al hacer clic */
+}
+
+.btn-delete {
+    background-color: #dc3545; /* Color de fondo rojo */
+}
+
+.btn-delete:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Formulario de subida/edición de proyectos */
+#uploadFormContainer {
+    background: var(--pure-white); /* Fondo blanco */
+    padding: 30px; /* Espaciado interno */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 8px 20px var(--shadow-light); /* Sombra */
+    margin-bottom: 40px; /* Margen inferior */
+    animation: fadeIn 0.5s ease-out; /* Animación de aparición */
+}
+
+#uploadFormContainer h2 {
+    margin-top: 0; /* Elimina el margen superior por defecto */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.8em; /* Tamaño de fuente */
+    color: var(--main-color); /* Color principal */
+}
+
+#uploadFormContainer form {
+    display: flex; /* Usa flexbox para organizar los elementos */
+    flex-direction: column; /* Elementos en columna */
+    gap: 15px; /* Espacio entre elementos */
+}
+
+/* Estilos para campos de texto, textarea y input de archivo dentro del formulario de subida */
+#uploadFormContainer input[type="text"],
+#uploadFormContainer textarea,
+#uploadFormContainer input[type="file"] {
+    padding: 12px 15px; /* Espaciado interno (vertical y horizontal) */
+    margin-bottom: 10px; /* Margen inferior */
+    border: 1px solid var(--soft-white); /* Borde suave */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+    font-family: inherit; /* Hereda la fuente del body */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves */
+    background-color: var(--light-gray); /* Fondo gris claro */
+}
+
+/* Estilos para los campos de formulario cuando están en foco */
+#uploadFormContainer input[type="text"]:focus,
+#uploadFormContainer textarea:focus,
+#uploadFormContainer input[type="file"]:focus {
+    outline: none; /* Elimina el contorno por defecto */
+    border-color: var(--main-color); /* Borde de color principal */
+    box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2); /* Sombra de foco (púrpura con opacidad) */
+}
+
+/* Estilos específicos para el textarea */
+#uploadFormContainer textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+    min-height: 100px; /* Altura mínima */
+}
+
+#uploadFormContainer button[type="submit"] {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 15px 30px; /* Espaciado interno */
+    font-size: 1.1em; /* Tamaño de fuente ligeramente más grande */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-top: 20px; /* Margen superior */
+    box-shadow: 0 6px 15px var(--shadow-medium); /* Sombra más pronunciada */
+}
+
+#uploadFormContainer button[type="submit"]:hover {
+    background: linear-gradient(135deg, var(--primary-gradient-end) 0%, var(--primary-gradient-start) 100%); /* Gradiente invertido al pasar el ratón */
+    transform: translateY(-3px); /* Desplazamiento hacia arriba */
+}
+
+/* Grid para mostrar los trabajos */
+.trabajos-grid {
+    display: grid; /* Usa grid para organizar los trabajos */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Columnas responsivas */
+    gap: 25px; /* Espacio entre las tarjetas */
+    margin-top: 40px; /* Margen superior */
+}
+
+/* Estilos para cada tarjeta de trabajo */
+.trabajo-card {
+    background: var(--pure-white); /* Fondo blanco */
+    border-radius: 12px; /* Bordes redondeados */
+    box-shadow: 0 6px 15px var(--shadow-light); /* Sombra */
+    padding: 25px; /* Espaciado interno */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para hover */
+    display: flex; /* Usa flexbox para el contenido interno */
+    flex-direction: column; /* Elementos en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    text-align: center; /* Centra el texto */
+}
+
+.trabajo-card:hover {
+    transform: translateY(-8px); /* Desplazamiento hacia arriba al pasar el ratón */
+    box-shadow: 0 12px 25px var(--shadow-medium); /* Sombra más pronunciada al pasar el ratón */
+}
+
+.trabajo-card img {
+    max-width: 100%; /* Ancho máximo del 100% del contenedor */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionarse */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.trabajo-card h3 {
+    margin-top: 0; /* Elimina el margen superior por defecto */
+    margin-bottom: 10px; /* Margen inferior */
+    color: var(--main-color); /* Color principal */
+    font-size: 1.5em; /* Tamaño de fuente */
+}
+
+.trabajo-card p {
+    font-size: 0.95em; /* Tamaño de fuente ligeramente más pequeño */
+    color: var(--text-color); /* Color de texto */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+.trabajo-card p:last-of-type {
+    margin-bottom: 20px; /* Margen inferior extra para el último párrafo */
+}
+
+/* Estilos para la sección de "me gusta" */
+.likes {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: auto; /* Empuja los likes al final de la tarjeta (en un flex container) */
+}
+
+/* Estilos para el botón de "me gusta" */
+.like-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 20px; /* Bordes muy redondeados (forma de píldora) */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.like-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+    transform: translateY(-1px); /* Ligero desplazamiento hacia arriba */
+}
+
+.likes-count {
+    font-weight: 600; /* Negrita */
+    color: var(--main-color); /* Color principal */
+}
+
+/* Animaciones CSS */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); } /* Desde invisible y ligeramente abajo */
+    to { opacity: 1; transform: translateY(0); } /* Hasta visible y en posición original */
+}
+
+@keyframes slideInFromTop {
+    from { opacity: 0; transform: translateY(-50px); } /* Desde invisible y arriba */
+    to { opacity: 1; transform: translateY(0); } /* Hasta visible y en posición original */
+}
+
+/* Aplica animaciones a elementos específicos */
+.container, h1, h2 {
+    animation: slideInFromTop 0.6s ease-out; /* Animación de deslizamiento desde arriba */
+}
+
+/* Estilos responsivos para pantallas más pequeñas */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Reduce el padding del body */
+    }
+    .container {
+        padding: 15px; /* Reduce el padding del contenedor principal */
+    }
+    h1 {
+        font-size: 2.2em; /* Reduce el tamaño de fuente del h1 */
+    }
+    h2 {
+        font-size: 1.6em; /* Reduce el tamaño de fuente del h2 */
+    }
+    .trabajos-grid {
+        grid-template-columns: 1fr; /* Una sola columna para el grid de trabajos */
+    }
+    #uploadFormContainer {
+        padding: 20px; /* Reduce el padding del formulario de subida */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
+/* Estilos para el modal (ventana emergente) */
+.modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en la ventana */
+    z-index: 1; /* Por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Permite scroll si el contenido es muy grande */
+    background-color: rgb(0,0,0); /* Fondo negro */
+    background-color: rgba(0,0,0,0.4); /* Fondo negro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Fondo blanco del contenido del modal */
+    margin: 15% auto; /* Margen superior y centrado horizontal */
+    padding: 20px; /* Espaciado interno */
+    border: 1px solid #888; /* Borde */
+    width: 80%; /* Ancho del 80% */
+    max-width: 700px; /* Ancho máximo */
+    border-radius: 12px; /* Bordes redondeados */
+    position: relative; /* Posicionamiento relativo para el botón de cerrar */
+}
+
+/* Estilos para el botón de cerrar el modal */
+.close-btn {
+    color: #aaa; /* Color gris */
+    float: right; /* Flota a la derecha */
+    font-size: 28px; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black; /* Cambio de color al pasar el ratón o enfocar */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cursor de puntero */
+}
+
+#modalImage {
+    width: 100%; /* Ancho completo */
+    height: auto; /* Altura automática para mantener la proporción */
+    border-radius: 8px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Margen inferior */
+}
+
+/* Estilos para el selector de logos de programas */
+.logo-selector {
+    display: flex; /* Usa flexbox */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 10px; /* Espacio entre los logos */
+}
+
+/* Estilos para cada opción de logo */
+.logo-option {
+    cursor: pointer; /* Cursor de puntero */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 5px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+    display: flex; /* Usa flexbox para alinear imagen y texto */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre imagen y texto */
+}
+
+.logo-option img {
+    width: 40px; /* Ancho de la imagen del logo */
+    height: 40px; /* Altura de la imagen del logo */
+}
+
+.logo-option span {
+    font-weight: 500; /* Negrita */
+}
+
+/* Oculta el checkbox real */
+.logo-option input[type="checkbox"] {
+    display: none;
+}
+
+/* Estilo para la imagen del logo cuando su checkbox asociado está marcado */
+.logo-option input[type="checkbox"]:checked + img {
+    border: 2px solid var(--main-color); /* Borde de color principal cuando está seleccionado */
+    border-radius: 8px; /* Bordes redondeados */
+}
+
+/* Estilos para la visualización de programas usados en las tarjetas de trabajo */
+.programas-usados {
+    display: flex; /* Usa flexbox */
+    align-items: center; /* Alinea verticalmente */
+    gap: 10px; /* Espacio entre elementos */
+    margin-top: 10px; /* Margen superior */
+}
+
+.programa-logo {
+    width: 30px; /* Ancho del logo del programa */
+    height: 30px; /* Altura del logo del programa */
+    object-fit: contain; /* Asegura que la imagen se ajuste dentro del cuadrado sin distorsión */
+}
+
+/* Estilos para los botones de acción del proyecto (editar, eliminar) */
+.project-actions {
+    display: flex; /* Usa flexbox */
+    gap: 10px; /* Espacio entre botones */
+    margin-top: 15px; /* Margen superior */
+}
+
+/* Estilos para el botón de editar */
+.edit-btn {
+    background-color: var(--secondary-color); /* Color de fondo secundario */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.edit-btn:hover {
+    background-color: var(--main-color); /* Cambio de color al pasar el ratón */
+}
+
+/* Estilos para el botón de eliminar */
+.delete-btn {
+    background-color: #dc3545; /* Color de fondo rojo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 0.9em; /* Tamaño de fuente */
+    box-shadow: 0 2px 5px var(--shadow-light); /* Sombra sutil */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+/* Estilos para el Footer principal */
+.main-footer {
+    background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%); /* Gradiente de fondo */
+    color: var(--pure-white); /* Color de texto blanco */
+    padding: 40px 20px; /* Espaciado interno */
+    margin-top: 50px; /* Margen superior */
+    font-family: 'Segoe UI', Arial, sans-serif; /* Fuente */
+    box-shadow: 0 -5px 15px rgba(0,0,0,0.1); /* Sombra superior */
+}
+
+.footer-content {
+    display: flex; /* Usa flexbox */
+    justify-content: space-around; /* Distribuye el espacio entre los elementos */
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    max-width: 1200px; /* Ancho máximo */
+    margin: 0 auto; /* Centra el contenido del footer */
+    gap: 30px; /* Espacio entre las secciones del footer */
+}
+
+.footer-section {
+    flex: 1; /* Permite que las secciones crezcan y se encojan */
+    min-width: 200px; /* Ancho mínimo para cada sección */
+}
+
+.footer-section h3 {
+    color: var(--soft-white); /* Color de texto blanco suave */
+    margin-bottom: 20px; /* Margen inferior */
+    font-size: 1.4em; /* Tamaño de fuente */
+    border-bottom: 2px solid var(--soft-white); /* Borde inferior */
+    padding-bottom: 10px; /* Espaciado entre el texto y el borde */
+    display: inline-block; /* Permite que el borde se ajuste al ancho del texto */
+}
+
+.footer-section p {
+    font-size: 0.95em; /* Tamaño de fuente */
+    line-height: 1.6; /* Espaciado entre líneas */
+    opacity: 0.9; /* Ligera transparencia */
+}
+
+.footer-section.links ul {
+    list-style: none; /* Elimina las viñetas de la lista */
+    padding: 0; /* Elimina el padding por defecto de la lista */
+}
+
+.footer-section.links ul li {
+    margin-bottom: 10px; /* Margen inferior para cada elemento de la lista */
+}
+
+.footer-section.links ul li a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    font-size: 0.95em; /* Tamaño de fuente */
+    transition: color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+    display: inline-block; /* Permite transformaciones */
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+    transform: translateX(5px); /* Desplazamiento horizontal al pasar el ratón */
+}
+
+.footer-section.social a {
+    color: var(--pure-white); /* Color de texto blanco */
+    text-decoration: none; /* Sin subrayado */
+    margin-right: 15px; /* Margen derecho */
+    font-size: 1em; /* Tamaño de fuente */
+    transition: color 0.3s ease; /* Transición suave para el color */
+}
+
+.footer-section.social a:hover {
+    color: var(--soft-white); /* Cambio de color al pasar el ratón */
+}
+
+.footer-bottom {
+    text-align: center; /* Centra el texto */
+    margin-top: 40px; /* Margen superior */
+    padding-top: 20px; /* Padding superior */
+    border-top: 1px solid rgba(255,255,255,0.2); /* Borde superior */
+    font-size: 0.85em; /* Tamaño de fuente más pequeño */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Media queries para hacer el footer responsivo */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Las secciones se apilan en columna */
+        align-items: center; /* Centra los elementos */
+        text-align: center; /* Centra el texto */
+    }
+
+    .footer-section {
+        margin-bottom: 30px; /* Margen inferior para separar secciones */
+    }
+
+    .footer-section h3 {
+        margin-bottom: 15px; /* Margen inferior para los títulos de sección */
+    }
+}
+
 /* Estilos para el botón de Cerrar Sesión */
 .btn-logout {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--icon-gradient-red) 0%, #dc3545 100%); /* Rojo para cerrar sesión */
-    color: var(--pure-white) !important; /* Importante para sobrescribir el estilo del enlace */
-    padding: 8px 15px;
-    border-radius: 5px;
-    text-decoration: none !important;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    display: inline-block; /* Se comporta como un bloque pero en línea con el texto */
+    background: linear-gradient(135deg, var(--icon-gradient-red) 0%, #dc3545 100%); /* Gradiente de rojo */
+    color: var(--pure-white) !important; /* Color de texto blanco, !important para asegurar la prioridad */
+    padding: 8px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes ligeramente redondeados */
+    text-decoration: none !important; /* Sin subrayado, !important para asegurar la prioridad */
+    font-weight: bold; /* Texto en negrita */
+    transition: all 0.3s ease; /* Transición suave para todas las propiedades */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra sutil */
     margin-left: 10px; /* Separación del texto de bienvenida */
 }
 
 .btn-logout:hover {
-    background: linear-gradient(135deg, #dc3545 0%, var(--icon-gradient-red) 100%);
-    transform: translateY(-1px);
+    background: linear-gradient(135deg, #dc3545 0%, var(--icon-gradient-red) 100%); /* Gradiente invertido al pasar el ratón */
+    transform: translateY(-1px); /* Ligero desplazamiento hacia arriba */
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }

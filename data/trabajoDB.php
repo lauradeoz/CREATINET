@@ -1,22 +1,66 @@
 <?php
+/**
+ * data/trabajoDB.php
+ *
+ * Esta clase `TrabajoDB` se encarga de todas las operaciones de la base de datos
+ * relacionadas con los "trabajos" o "proyectos" del portfolio.
+ * Utiliza MySQLi para interactuar con la tabla `proyectos` y `likes`.
+ */
+
+// Incluye el archivo de configuración de la base de datos.
 require_once __DIR__ . '/../config/database.php';
 
 class TrabajoDB {
-    private $db;
+    private $db; // Propiedad para almacenar la conexión a la base de datos.
 
+    /**
+     * Constructor de la clase TrabajoDB.
+     *
+     * @param Database $database Una instancia de la clase Database que proporciona la conexión.
+     */
     public function __construct($database) {
+        // Obtiene la conexión mysqli del objeto Database.
         $this->db = $database->getConexion();
     }
 
+    /**
+     * Crea un nuevo trabajo (proyecto) en la base de datos.
+     *
+     * @param int    $id_usuario       ID del usuario que sube el trabajo.
+     * @param string $titulo           Título del trabajo.
+     * @param string $descripcion      Descripción del trabajo.
+     * @param string $archivo          Ruta del archivo de imagen del trabajo.
+     * @param array  $programas_usados Array de programas utilizados en el trabajo.
+     * @return array Un array asociativo con el ID del trabajo insertado.
+     */
     public function create($id_usuario, $titulo, $descripcion, $archivo, $programas_usados) {
+        // Convierte el array de programas usados en una cadena separada por comas.
         $programas_str = implode(", ", $programas_usados);
+        
+        // Prepara la consulta SQL para insertar un nuevo proyecto.
+        // 'ususario_id' es un error tipográfico en el nombre de la columna, debería ser 'usuario_id'.
         $stmt = $this->db->prepare("INSERT INTO proyectos (ususario_id, titulo, descripcion, archivo, programas_usados) VALUES (?, ?, ?, ?, ?)");
+        
+        // Vincula los parámetros a la consulta preparada.
+        // 'i' para entero (id_usuario), 's' para cadena (titulo, descripcion, archivo, programas_str).
         $stmt->bind_param("issss", $id_usuario, $titulo, $descripcion, $archivo, $programas_str);
+        
+        // Ejecuta la consulta.
         $stmt->execute();
+        
+        // Cierra la declaración preparada.
         $stmt->close();
+        
+        // Devuelve el ID del último insertado.
         return ['id' => $this->db->insert_id];
     }
 
+    /**
+     * Obtiene todos los trabajos de la base de datos, incluyendo el nombre del usuario
+     * y el conteo de likes.
+     *
+     * @return array Un array de arrays asociativos, donde cada uno representa un trabajo.
+     */
     public function getAll() {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito
@@ -26,56 +70,134 @@ class TrabajoDB {
             GROUP BY t.id
             ORDER BY t.fecha_publicacion DESC
         ";
+        // Ejecuta la consulta SQL.
         $result = $this->db->query($sql);
+        
         $trabajos = [];
+        // Itera sobre los resultados y los añade al array de trabajos.
         while ($row = $result->fetch_assoc()) {
             $trabajos[] = $row;
         }
         return $trabajos;
     }
 
+    /**
+     * Obtiene un trabajo específico por su ID.
+     *
+     * @param int $id ID del trabajo a buscar.
+     * @return array|null Un array asociativo con los datos del trabajo, o null si no se encuentra.
+     */
     public function getById($id) {
+        // Prepara la consulta para seleccionar un trabajo por su ID.
         $stmt = $this->db->prepare("SELECT * FROM proyectos WHERE id = ?");
+        
+        // Vincula el ID como parámetro entero.
         $stmt->bind_param("i", $id);
+        
+        // Ejecuta la consulta.
         $stmt->execute();
+        
+        // Obtiene el resultado de la consulta.
         $result = $stmt->get_result();
+        
+        // Obtiene la fila como un array asociativo.
         $trabajo = $result->fetch_assoc();
+        
+        // Cierra la declaración.
         $stmt->close();
+        
         return $trabajo;
     }
 
+    /**
+     * Actualiza un trabajo existente en la base de datos.
+     *
+     * @param int    $id               ID del trabajo a actualizar.
+     * @param string $titulo           Nuevo título del trabajo.
+     * @param string $descripcion      Nueva descripción del trabajo.
+     * @param string $archivo          Nueva ruta del archivo de imagen del trabajo.
+     * @param array  $programas_usados Array de programas utilizados en el trabajo.
+     * @return bool True si la actualización fue exitosa, false en caso contrario.
+     */
     public function update($id, $titulo, $descripcion, $archivo, $programas_usados) {
+        // Convierte el array de programas usados en una cadena separada por comas.
         $programas_str = implode(", ", $programas_usados);
+        
+        // Consulta SQL para actualizar un proyecto.
         $sql = "UPDATE proyectos SET titulo = ?, descripcion = ?, archivo = ?, programas_usados = ? WHERE id = ?";
+        
+        // Prepara la consulta.
         $stmt = $this->db->prepare($sql);
+        
+        // Verifica si la preparación de la consulta falló.
         if ($stmt === false) {
             error_log("Error al preparar la consulta UPDATE: " . $this->db->error);
             return false;
         }
+        
+        // Vincula los parámetros.
         $stmt->bind_param("ssssi", $titulo, $descripcion, $archivo, $programas_str, $id);
+        
+        // Ejecuta la consulta.
         $execute_success = $stmt->execute();
+        
+        // Verifica si la ejecución de la consulta falló.
         if ($execute_success === false) {
             error_log("Error al ejecutar la consulta UPDATE: " . $stmt->error);
             $stmt->close();
             return false;
         }
+        
+        // Obtiene el número de filas afectadas por la operación.
         $affectedRows = $stmt->affected_rows;
+        
+        // Cierra la declaración.
         $stmt->close();
+        
         error_log("DEBUG: Filas afectadas por UPDATE: " . $affectedRows);
+        
+        // Devuelve true si se afectó al menos una fila (indicando éxito).
         return $affectedRows > 0;
     }
 
+    /**
+     * Elimina un trabajo de la base de datos.
+     *
+     * @param int $id ID del trabajo a eliminar.
+     * @return bool True si la eliminación fue exitosa, false en caso contrario.
+     */
     public function delete($id) {
         error_log("DEBUG: Ejecutando DELETE para proyecto con ID: " . $id);
+        
+        // Prepara la consulta para eliminar un proyecto por su ID.
         $stmt = $this->db->prepare("DELETE FROM proyectos WHERE id = ?");
+        
+        // Vincula el ID como parámetro entero.
         $stmt->bind_param("i", $id);
+        
+        // Ejecuta la consulta.
         $stmt->execute();
+        
+        // Obtiene el número de filas afectadas.
         $affectedRows = $stmt->affected_rows;
+        
+        // Cierra la declaración.
         $stmt->close();
+        
         error_log("DEBUG: Filas afectadas por DELETE: " . $affectedRows);
+        
+        // Devuelve true si se afectó al menos una fila.
         return $affectedRows > 0;
     }
 
+    /**
+     * Maneja la lógica de "me gusta" para un trabajo.
+     * Si el usuario ya dio "me gusta", lo quita; de lo contrario, lo añade.
+     *
+     * @param int $id_usuario ID del usuario.
+     * @param int $id_trabajo ID del trabajo.
+     * @return int 1 si se añadió el like, -1 si se quitó, 0 si hubo un error.
+     */
     public function darLike($id_usuario, $id_trabajo) {
         // Verificar si ya existe el like
         $stmt = $this->db->prepare("SELECT id FROM likes WHERE id_usuario = ? AND id_trabajo = ?");
@@ -122,6 +244,12 @@ class TrabajoDB {
         }
     }
 
+    /**
+     * Obtiene los proyectos subidos por un usuario específico.
+     *
+     * @param int $id_usuario ID del usuario.
+     * @return array Un array de arrays asociativos, donde cada uno representa un trabajo del usuario.
+     */
     public function getProyectosUsuario($id_usuario) {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito
@@ -144,6 +272,12 @@ class TrabajoDB {
         return $trabajos;
     }
 
+    /**
+     * Obtiene proyectos de otros usuarios (excluyendo los del usuario actual).
+     *
+     * @param int $id_usuario ID del usuario actual.
+     * @return array Un array de arrays asociativos, donde cada uno representa un trabajo de otros usuarios.
+     */
     public function getProyectosOtros($id_usuario) {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito

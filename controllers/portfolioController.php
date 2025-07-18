@@ -110,11 +110,13 @@ class PortfolioController {
         }
 
         $result = $this->trabajoDB->update($this->trabajoId, $titulo, $descripcion, $archivo, $programas_usados);
-        if (! $result) {
-            return $this->notFoundResponse();
+        if ($result) {
+            $response['status_code_header'] = 'HTTP/1.1 200 OK';
+            $response['body'] = json_encode(['success' => true, 'message' => 'Proyecto actualizado con éxito.']);
+        } else {
+            $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';
+            $response['body'] = json_encode(['success' => false, 'error' => 'Error al actualizar el proyecto en la base de datos.']);
         }
-        $response['status_code_header'] = 'HTTP/1.1 200 OK';
-        $response['body'] = json_encode($result);
         return $response;
     }
 

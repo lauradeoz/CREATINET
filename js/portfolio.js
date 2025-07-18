@@ -146,7 +146,59 @@ document.addEventListener('DOMContentLoaded', function() {
             uploadForm.method = 'POST'; // Usar POST para enviar el formulario, la API lo manejará como PUT
 
             // Mostrar el formulario de subida/edición
-            document.getElementById('uploadFormContainer').style.display = 'block';
+            const uploadFormContainer = document.getElementById('uploadFormContainer');
+            uploadFormContainer.style.display = 'block';
+            uploadFormContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Lógica para manejar el envío del formulario de subida/edición
+    uploadForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir el envío normal del formulario
+
+        const formData = new FormData(uploadForm);
+        const trabajoId = hiddenIdInput.value;
+
+        let url = '/CREATINET/api/trabajos';
+        let method = 'POST';
+        let headers = {};
+
+        if (trabajoId) {
+            // Es una actualización
+            url = `/CREATINET/api/trabajos/${trabajoId}`;
+            // Para simular PUT con FormData, usamos POST y el encabezado X-HTTP-Method-Override
+            headers['X-HTTP-Method-Override'] = 'PUT';
+        }
+
+        fetch(url, {
+            method: method,
+            headers: headers,
+            body: formData
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                // Si la respuesta no es OK, intentar leer el error del cuerpo
+                return response.json().then(err => {
+                    throw new Error(err.error || `HTTP ${response.status}: ${response.statusText}`);
+                });
+            }
+        })
+        .then(data => {
+            if (data.success) {
+                alert('Proyecto guardado con éxito!');
+                // Ocultar el formulario y recargar la página para ver los cambios
+                document.getElementById('uploadFormContainer').style.display = 'none';
+                uploadForm.reset(); // Limpiar el formulario
+                window.location.reload(); // Recargar para mostrar los cambios
+            } else {
+                alert('Error al guardar el proyecto: ' + (data.error || 'Error desconocido'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error de conexión al guardar el proyecto: ' + error.message);
         });
     });
 });

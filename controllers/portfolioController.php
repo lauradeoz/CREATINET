@@ -69,10 +69,17 @@ class PortfolioController {
     }
 
     private function updateTrabajo() {
-        $input = (array) $_POST; // Usar $_POST directamente para formularios
-        $titulo = filter_input(INPUT_POST, 'titulo', FILTER_SANITIZE_STRING);
-        $descripcion = filter_input(INPUT_POST, 'descripcion', FILTER_SANITIZE_STRING);
-        $programas_usados = isset($_POST['programas_usados']) ? $_POST['programas_usados'] : [];
+        // Leer datos de php://input para PUT requests (JSON)
+        $input = json_decode(file_get_contents('php://input'), TRUE);
+
+        // Si no hay datos en php://input, intentar leer de $_POST (para form-data)
+        if (empty($input) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = $_POST;
+        }
+
+        $titulo = $input['titulo'] ?? null;
+        $descripcion = $input['descripcion'] ?? null;
+        $programas_usados = isset($input['programas_usados']) ? (array)$input['programas_usados'] : [];
 
         // Manejo de la subida de archivos para la actualización
         $archivo = null;

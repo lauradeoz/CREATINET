@@ -158,7 +158,8 @@ button:active {
 #uploadFormContainer input[type="text"],
 #uploadFormContainer textarea,
 #uploadFormContainer input[type="file"] {
-    padding: 12px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
     border: 1px solid var(--soft-white);
     border-radius: 8px;
     font-size: 1em;

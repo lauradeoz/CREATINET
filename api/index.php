@@ -52,12 +52,20 @@ switch ($endpoint) {
         // Prioritize X-HTTP-Method-Override if set, otherwise use the actual request method
         $actualMethod = $requestMethod; // This already considers X-HTTP-Method-Override
 
-        if ($actualMethod === 'POST' && isset($_POST['trabajo_id']) && !empty($_POST['trabajo_id'])) {
-            // This is an update operation via POST form submission, force PUT for controller
-            $trabajoId = (int)$_POST['trabajo_id'];
+        // If it's a PUT request (either direct or overridden), use the ID from the URL
+        if ($actualMethod === 'PUT') {
             $controller = new PortfolioController($database, 'PUT', $trabajoId);
+        } else if ($actualMethod === 'POST') {
+            // If it's a POST request, it could be a creation or an update via form submission
+            // If trabajoId is present in the URL, it's an update
+            if ($trabajoId) {
+                $controller = new PortfolioController($database, 'PUT', $trabajoId); // Treat as PUT for controller
+            } else {
+                // Otherwise, it's a creation
+                $controller = new PortfolioController($database, 'POST', null);
+            }
         } else {
-            // Use the determined actual method (GET, POST for create, DELETE)
+            // For GET and DELETE, use the determined actual method and URL ID
             $controller = new PortfolioController($database, $actualMethod, $trabajoId);
         }
         try {

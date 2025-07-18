@@ -230,8 +230,8 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                 <ul>
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="login.php">Login</a></li>
-                    <li><a href="#">Privacidad</a></li>
-                    <li><a href="#">Términos</a></li>
+                    <li><a href="privacidad.html">Privacidad</a></li>
+                    <li><a href="terminos.html">Términos</a></li>
                 </ul>
             </div>
             <div class="footer-section social">

@@ -77,11 +77,14 @@ switch ($endpoint) {
         break;
 
     case 'like':
+        error_log("DEBUG: Endpoint 'like' alcanzado.");
+        error_log("DEBUG: SESSION[\"usuario_id\"] = " . (isset($_SESSION['usuario_id']) ? $_SESSION['usuario_id'] : 'NO SET'));
         if ($requestMethod == 'POST') {
             $data = json_decode(file_get_contents('php://input'));
+            error_log("DEBUG: Datos recibidos para like: " . print_r($data, true));
             if (!isset($_SESSION['usuario_id']) || !isset($data->id_trabajo)) {
                 header('HTTP/1.1 400 Bad Request');
-                echo json_encode(['success' => false, 'error' => 'Datos incompletos']);
+                echo json_encode(['success' => false, 'error' => 'Datos incompletos o sesión no iniciada.']);
                 exit();
             }
             $trabajoDB = new TrabajoDB($database);

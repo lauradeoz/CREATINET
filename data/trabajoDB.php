@@ -48,10 +48,21 @@ class TrabajoDB {
         $programas_str = implode(", ", $programas_usados);
         $sql = "UPDATE proyectos SET titulo = ?, descripcion = ?, archivo = ?, programas_usados = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
+        if ($stmt === false) {
+            error_log("Error al preparar la consulta UPDATE: " . $this->db->error);
+            return false;
+        }
         $stmt->bind_param("ssssi", $titulo, $descripcion, $archivo, $programas_str, $id);
-        $stmt->execute();
+        $execute_success = $stmt->execute();
+        if ($execute_success === false) {
+            error_log("Error al ejecutar la consulta UPDATE: " . $stmt->error);
+            $stmt->close();
+            return false;
+        }
+        $affectedRows = $stmt->affected_rows;
         $stmt->close();
-        return $stmt->affected_rows > 0;
+        error_log("DEBUG: Filas afectadas por UPDATE: " . $affectedRows);
+        return $affectedRows > 0;
     }
 
     public function delete($id) {
@@ -66,27 +77,48 @@ class TrabajoDB {
     }
 
     public function darLike($id_usuario, $id_trabajo) {
-        //verificar si ya existe el like
+        // Verificar si ya existe el like
         $stmt = $this->db->prepare("SELECT id FROM likes WHERE id_usuario = ? AND id_trabajo = ?");
+        if ($stmt === false) {
+            error_log("Error al preparar SELECT en darLike: " . $this->db->error);
+            return 0;
+        }
         $stmt->bind_param("ii", $id_usuario, $id_trabajo);
         $stmt->execute();
         $stmt->store_result();
+        
         if ($stmt->num_rows > 0) {
-            //si ya existe, lo borramos
+            // Si ya existe, lo borramos
             $stmt->close();
             $stmt = $this->db->prepare("DELETE FROM likes WHERE id_usuario = ? AND id_trabajo = ?");
+            if ($stmt === false) {
+                error_log("Error al preparar DELETE en darLike: " . $this->db->error);
+                return 0;
+            }
             $stmt->bind_param("ii", $id_usuario, $id_trabajo);
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                error_log("Error al ejecutar DELETE en darLike: " . $stmt->error);
+                $stmt->close();
+                return 0;
+            }
             $stmt->close();
-            return -1; //indica que se quito el like
+            return -1; // Indica que se quitó el like
         } else {
-            //si no existe, lo insertamos
+            // Si no existe, lo insertamos
             $stmt->close();
             $stmt = $this->db->prepare("INSERT INTO likes (id_usuario, id_trabajo) VALUES (?, ?)");
+            if ($stmt === false) {
+                error_log("Error al preparar INSERT en darLike: " . $this->db->error);
+                return 0;
+            }
             $stmt->bind_param("ii", $id_usuario, $id_trabajo);
-            $stmt->execute();
+            if (!$stmt->execute()) {
+                error_log("Error al ejecutar INSERT en darLike: " . $stmt->error);
+                $stmt->close();
+                return 0;
+            }
             $stmt->close();
-            return 1; //indica que se dio el like
+            return 1; // Indica que se dio el like
         }
     }
 

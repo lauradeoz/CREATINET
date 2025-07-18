@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const trabajoId = this.dataset.id;
             const likesCountSpan = this.nextElementSibling;
 
-            fetch('../api/like', {
+            fetch('/CREATINET/api/like', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

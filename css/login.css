@@ -145,6 +145,7 @@ input[type="submit"]:active {
     text-decoration: none; /* Sin subrayado */
     font-weight: 600; /* Negrita */
     transition: color 0.3s ease; /* Transición suave para el color */
+    cursor: pointer; /* Añadido para que aparezca el puntero */
 }
 
 /* Estilos para los enlaces al pasar el ratón */
@@ -218,14 +219,13 @@ input[type="submit"]:active {
     height: 100%; /* Alto completo */
     overflow: auto; /* Permite scroll si el contenido es muy grande */
     background-color: rgba(0,0,0,0.6); /* Fondo negro semi-transparente */
-    display: flex; /* Usa flexbox para centrar el contenido del modal */
-    align-items: center; /* Centra verticalmente */
-    justify-content: center; /* Centra horizontalmente */
 }
 
 /* Clase para mostrar el modal */
 .modal.show {
     display: flex; /* Muestra el modal cuando se añade esta clase */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
 }
 
 /* Estilos para el contenido del modal */

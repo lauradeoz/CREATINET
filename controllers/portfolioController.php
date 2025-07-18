@@ -101,12 +101,48 @@ class PortfolioController {
      * @return array Respuesta HTTP con el estado y los datos del nuevo trabajo.
      */
     private function createTrabajo() {
-        // Decodifica los datos de entrada JSON del cuerpo de la solicitud.
-        $input = (array) json_decode(file_get_contents('php://input'), TRUE);
-        // TODO: Aquí se debería añadir una validación robusta de los datos de entrada.
-        $result = $this->trabajoDB->create($input); // Llama al método create de TrabajoDB.
-        $response['status_code_header'] = 'HTTP/1.1 201 Created'; // 201 Created para creación exitosa.
-        $response['body'] = json_encode($result);
+        // Los datos vienen de un FormData, así que usamos $_POST y $_FILES.
+        $titulo = $_POST['titulo'] ?? null;
+        $descripcion = $_POST['descripcion'] ?? null;
+        $programas_usados = isset($_POST['programas_usados']) ? (array)$_POST['programas_usados'] : [];
+        $id_usuario = $_SESSION['usuario_id'] ?? null;
+
+        // Validar que el usuario esté logueado.
+        if (!$id_usuario) {
+            $response['status_code_header'] = 'HTTP/1.1 401 Unauthorized';
+            $response['body'] = json_encode(['success' => false, 'error' => 'Usuario no autenticado.']);
+            return $response;
+        }
+
+        $archivo = null;
+        // Manejo de la subida de archivos.
+        if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
+            $target_dir = "../img/trabajos/";
+            if (!file_exists($target_dir)) {
+                mkdir($target_dir, 0777, true);
+            }
+            $imageFileType = strtolower(pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION));
+            $uniqueFileName = uniqid() . "." . $imageFileType;
+            $target_file = $target_dir . $uniqueFileName;
+
+            if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
+                $archivo = $target_file;
+            } else {
+                $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';
+                $response['body'] = json_encode(['success' => false, 'error' => 'Error al subir el archivo.']);
+                return $response;
+            }
+        } else {
+            $response['status_code_header'] = 'HTTP/1.1 400 Bad Request';
+            $response['body'] = json_encode(['success' => false, 'error' => 'El archivo es requerido.']);
+            return $response;
+        }
+
+        // Llamar al método create de TrabajoDB con los datos correctos.
+        $result = $this->trabajoDB->create($id_usuario, $titulo, $descripcion, $archivo, $programas_usados);
+        
+        $response['status_code_header'] = 'HTTP/1.1 201 Created';
+        $response['body'] = json_encode(['success' => true, 'data' => $result]);
         return $response;
     }
 

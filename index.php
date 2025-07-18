@@ -213,16 +213,6 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
         </div>
     </div>
     <script src="js/portfolio.js"></script>
-    <script>
-        document.getElementById('toggleUploadForm').addEventListener('click', function() {
-            var formContainer = document.getElementById('uploadFormContainer');
-            if (formContainer.style.display === 'none') {
-                formContainer.style.display = 'block';
-            } else {
-                formContainer.style.display = 'none';
-            }
-        });
-    </script>
     <footer class="main-footer">
         <div class="footer-content">
             <div class="footer-section about">

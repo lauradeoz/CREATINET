@@ -102,13 +102,15 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+    <div id="user-info-top-right">
+        <p><strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></strong> | <a href="logout.php" class="btn-logout"><strong>Cerrar sesión</strong></a></p>
+    </div>
     <div class="container">
         <img src="img/LOGO_CREATINET.png" alt="Logo Creatinet" style="display: block; margin: 0 auto 20px auto; max-width: 150px;">
         <h1>Portfolio de Creadores</h1>
         <?php if (!empty($errorMessage)): ?>
             <div style="color: red; margin-bottom: 10px;"><?php echo htmlspecialchars($errorMessage); ?></div>
         <?php endif; ?>
-        <p><strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></strong> | <a href="logout.php">Cerrar sesión</a></p>
 
         <button id="toggleUploadForm">Subir Nuevo Proyecto</button>
 

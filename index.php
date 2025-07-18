@@ -108,7 +108,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
         <?php if (!empty($errorMessage)): ?>
             <div style="color: red; margin-bottom: 10px;"><?php echo htmlspecialchars($errorMessage); ?></div>
         <?php endif; ?>
-        <p>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?> | <a href="logout.php">Cerrar sesión</a></p>
+        <p><strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></strong> | <a href="logout.php">Cerrar sesión</a></p>
 
         <button id="toggleUploadForm">Subir Nuevo Proyecto</button>
 
@@ -133,7 +133,11 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                         ?>
                     </div>
                 </div>
-                <input type="file" name="archivo" required>
+                <input type="file" name="archivo">
+                <div id="currentImageContainer" style="display: none; margin-top: 15px;">
+                    <p>Imagen actual:</p>
+                    <img id="currentProjectImage" src="" alt="Imagen actual del proyecto" style="max-width: 200px; height: auto; border-radius: 8px; margin-top: 5px;">
+                </div>
                 <button type="submit">Subir</button>
             </form>
         </div>

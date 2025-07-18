@@ -105,6 +105,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const programasCheckboxes = uploadForm.querySelectorAll('input[name="programas_usados[]"]');
     const submitButton = uploadForm.querySelector('button[type="submit"]');
     let hiddenIdInput = uploadForm.querySelector('input[name="trabajo_id"]');
+    const currentImageContainer = document.getElementById('currentImageContainer');
+    const currentProjectImage = document.getElementById('currentProjectImage');
+    const fileInput = uploadForm.querySelector('input[name="archivo"]');
 
     if (!hiddenIdInput) {
         hiddenIdInput = document.createElement('input');
@@ -120,11 +123,22 @@ document.addEventListener('DOMContentLoaded', function() {
             const titulo = this.dataset.titulo;
             const descripcion = this.dataset.descripcion;
             const programas = this.dataset.programas ? this.dataset.programas.split(', ') : [];
+            const archivo = this.dataset.archivo; // Obtener la URL del archivo
 
             // Rellenar el formulario
             tituloInput.value = titulo;
             descripcionTextarea.value = descripcion;
             hiddenIdInput.value = trabajoId;
+
+            // Mostrar la imagen actual si existe
+            if (archivo) {
+                currentProjectImage.src = archivo;
+                currentImageContainer.style.display = 'block';
+                fileInput.removeAttribute('required'); // No es requerido si ya hay una imagen
+            } else {
+                currentImageContainer.style.display = 'none';
+                fileInput.setAttribute('required', 'required');
+            }
 
             // Desmarcar todos los checkboxes de programas
             programasCheckboxes.forEach(checkbox => {
@@ -142,7 +156,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Cambiar el texto del botón y la acción del formulario
             submitButton.textContent = 'Actualizar Proyecto';
-            uploadForm.action = `../api/trabajos/${trabajoId}`; // Apuntar a la API de actualización
+            uploadForm.action = `/CREATINET/api/trabajos/${trabajoId}`; // Apuntar a la API de actualización
             uploadForm.method = 'POST'; // Usar POST para enviar el formulario, la API lo manejará como PUT
 
             // Mostrar el formulario de subida/edición
@@ -191,6 +205,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Ocultar el formulario y recargar la página para ver los cambios
                 document.getElementById('uploadFormContainer').style.display = 'none';
                 uploadForm.reset(); // Limpiar el formulario
+                currentImageContainer.style.display = 'none'; // Ocultar la imagen actual
+                fileInput.setAttribute('required', 'required'); // Volver a hacer el campo de archivo requerido
                 window.location.reload(); // Recargar para mostrar los cambios
             } else {
                 alert('Error al guardar el proyecto: ' + (data.error || 'Error desconocido'));
@@ -200,5 +216,23 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             alert('Error de conexión al guardar el proyecto: ' + error.message);
         });
+    });
+
+    // Lógica para el botón "Subir Nuevo Proyecto" (para resetear el formulario)
+    document.getElementById('toggleUploadForm').addEventListener('click', function() {
+        const formContainer = document.getElementById('uploadFormContainer');
+        if (formContainer.style.display === 'none') {
+            formContainer.style.display = 'block';
+            // Resetear el formulario cuando se abre para una nueva subida
+            uploadForm.reset();
+            hiddenIdInput.value = ''; // Limpiar el ID del trabajo
+            submitButton.textContent = 'Subir'; // Restaurar el texto del botón
+            uploadForm.action = '/CREATINET/api/trabajos'; // Restaurar la acción del formulario
+            uploadForm.method = 'POST'; // Restaurar el método del formulario
+            currentImageContainer.style.display = 'none'; // Ocultar la imagen actual
+            fileInput.setAttribute('required', 'required'); // Hacer el campo de archivo requerido
+        } else {
+            formContainer.style.display = 'none';
+        }
     });
 });

@@ -1,4 +1,9 @@
 <?php
+// Configuración de errores
+    ini_set('display_errors', 0); // No mostrar errores en pantalla
+    ini_set('log_errors', 1); // Habilitar el registro de errores
+    ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
+    error_reporting(E_ALL); // Reportar todos los errores
 /**
  * controllers/portfolioController.php
  *
@@ -117,7 +122,7 @@ class PortfolioController {
         $archivo = null;
         // Manejo de la subida de archivos.
         if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
-            $target_dir = "../img/trabajos/";
+            $target_dir = __DIR__ . "/../img/trabajos/";
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);
             }
@@ -172,7 +177,7 @@ class PortfolioController {
         // Manejo de la subida de archivos para la actualización.
         // Verifica si se ha subido un nuevo archivo y si no hay errores.
         if (isset($_FILES['archivo']) && $_FILES['archivo']['error'] === UPLOAD_ERR_OK) {
-            $target_dir = "../img/trabajos/"; // Directorio de destino para las imágenes.
+            $target_dir = __DIR__ . "/../img/trabajos/"; // Directorio de destino para las imágenes.
             // Crea el directorio si no existe.
             if (!file_exists($target_dir)) {
                 mkdir($target_dir, 0777, true);

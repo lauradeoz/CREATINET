@@ -1,4 +1,9 @@
 <?php
+// Configuración de errores
+    ini_set('display_errors', 0); // No mostrar errores en pantalla
+    ini_set('log_errors', 1); // Habilitar el registro de errores
+    ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
+    error_reporting(E_ALL); // Reportar todos los errores
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -142,6 +147,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                     <p>Imagen actual:</p>
                     <img id="currentProjectImage" src="" alt="Imagen actual del proyecto" style="max-width: 200px; height: auto; border-radius: 8px; margin-top: 5px;">
                 </div>
+                <input type="hidden" name="trabajos">
                 <button type="submit">Subir</button>
             </form>
         </div>

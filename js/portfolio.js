@@ -37,13 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(uploadForm); // Crea un objeto FormData con los datos del formulario.
             const trabajoId = hiddenIdInput.value; // Obtiene el ID del trabajo (vacío para nuevas subidas).
 
-            let url = '/CREATINET/api/trabajos'; // URL por defecto para crear un nuevo trabajo.
+            let url = '/api/index.php'; // URL por defecto para crear un nuevo trabajo.
+            // let url = '/CREATINET/api/trabajos'; // URL por defecto para crear un nuevo trabajo.
             let method = 'POST'; // Método por defecto para crear.
             let headers = {}; // Cabeceras adicionales.
 
             if (trabajoId) {
                 // Si hay un ID de trabajo, es una actualización.
-                url = `/CREATINET/api/trabajos/${trabajoId}`; // La URL incluye el ID.
+                url = `/api/index.php/${trabajoId}`; // La URL incluye el ID.
+                // url = `/CREATINET/api/trabajos/${trabajoId}`; // La URL incluye el ID.
                 // Para simular PUT con FormData, usamos POST y el encabezado X-HTTP-Method-Override.
                 headers['X-HTTP-Method-Override'] = 'PUT';
             }
@@ -95,7 +97,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const likesCountSpan = this.nextElementSibling; // Obtiene el elemento span que muestra el contador de likes.
 
             // Realiza una solicitud POST a la API para registrar/quitar un "me gusta".
-            fetch('/CREATINET/api/like', {
+            // fetch('/CREATINET/api/like', {
+            fetch('/api/like', {
                 method: 'POST', // Método HTTP POST.
                 headers: {
                     'Content-Type': 'application/json' // Indica que el cuerpo de la solicitud es JSON.
@@ -162,7 +165,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const trabajoId = this.dataset.id; // Obtiene el ID del trabajo a eliminar.
             if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) { // Pide confirmación al usuario.
                 // Realiza una solicitud fetch para eliminar el proyecto.
-                fetch(`/CREATINET/api/trabajos/${trabajoId}`, {
+                // fetch(`/CREATINET/api/trabajos/${trabajoId}`, {
+                fetch(`/api/index.php/${trabajoId}`, {
                     method: 'POST', // Se envía como POST para compatibilidad con formularios HTML.
                     headers: {
                         'X-HTTP-Method-Override': 'DELETE' // Se simula el método DELETE usando una cabecera.
@@ -249,7 +253,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Cambia el texto del botón de envío a "Actualizar Proyecto".
             if (submitButton) submitButton.textContent = 'Actualizar Proyecto';
             // Establece la acción del formulario para apuntar a la API de actualización.
-            if (uploadForm) uploadForm.action = `/CREATINET/api/trabajos/${trabajoId}`;
+            // if (uploadForm) uploadForm.action = `/CREATINET/api/trabajos/${trabajoId}`;
+            if (uploadForm) uploadForm.action = `/api/index.php/${trabajoId}`;
             if (uploadForm) uploadForm.method = 'POST'; // Usa POST para enviar el formulario (la API lo manejará como PUT).
 
             // Mostrar el formulario de subida/edición
@@ -272,7 +277,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (uploadForm) uploadForm.reset(); // Limpia los campos.
             if (hiddenIdInput) hiddenIdInput.value = ''; // Limpia el ID del trabajo (para indicar nueva subida).
             if (submitButton) submitButton.textContent = 'Subir'; // Restaura el texto del botón.
-            if (uploadForm) uploadForm.action = '/CREATINET/api/trabajos'; // Restaura la acción del formulario.
+            // if (uploadForm) uploadForm.action = '/CREATINET/api/trabajos'; // Restaura la acción del formulario.
+            if (uploadForm) uploadForm.action = '/api/index.php'; // Restaura la acción del formulario.
             if (uploadForm) uploadForm.method = 'POST'; // Restaura el método del formulario.
             if (currentImageContainer) currentImageContainer.style.display = 'none'; // Oculta la imagen actual.
             if (fileInput) fileInput.setAttribute('required', 'required'); // Hace el campo de archivo requerido para nuevas subidas.

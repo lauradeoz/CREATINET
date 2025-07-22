@@ -1,0 +1,5 @@
+[21-Jul-2025 12:56:41 Europe/Berlin] PHP Warning:  require_once(C:/xampp/htdocs/CREATINET/data/trabajoDB.php): Failed to open stream: No such file or directory in /homepages/21/d4299135752/htdocs/laura/api/index.php on line 29
+[21-Jul-2025 12:56:41 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:/xampp/htdocs/CREATINET/data/trabajoDB.php' (include_path='.:/usr/lib/php8.3') in /homepages/21/d4299135752/htdocs/laura/api/index.php:29
+Stack trace:
+#0 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/api/index.php on line 29

@@ -26,7 +26,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 
 // Inclusión de archivos necesarios para la funcionalidad de la API.
 require_once __DIR__ . '/../config/database.php'; // Configuración de la base de datos.
-require_once 'C:/xampp/htdocs/CREATINET/data/trabajoDB.php'; // Clase para interactuar con la tabla de trabajos.
+require_once '../data/trabajoDB.php'; // Clase para interactuar con la tabla de trabajos.
 require_once __DIR__ . '/../controllers/portfolioController.php'; // Controlador para la lógica de negocio de trabajos.
 
 // --- Lógica de Enrutamiento ---
@@ -47,7 +47,8 @@ error_log("DEBUG: Método de solicitud final para API: " . $requestMethod);
 
 // Elimina el prefijo del directorio base de la URI si existe.
 // Esto es necesario si la aplicación no está en la raíz del servidor web.
-$basePath = '/CREATINET/'; // Debe coincidir con RewriteBase en .htaccess.
+$basePath = ''; // Debe coincidir con RewriteBase en .htaccess.
+// $basePath = '/CREATINET/'; // Debe coincidir con RewriteBase en .htaccess.
 if (strpos($requestUri, $basePath) === 0) {
     $requestUri = substr($requestUri, strlen($basePath));
 }
@@ -65,6 +66,7 @@ if (empty($segments[0]) || $segments[0] !== 'api') {
 
 // El segundo segmento es el nombre del endpoint (ej. 'trabajos', 'like').
 $endpoint = isset($segments[1]) ? $segments[1] : null;
+$tarea = isset($_POST['trabajos']) ? 'trabajos' : null;
 // El tercer segmento (si existe) es el ID de un recurso (ej. ID de trabajo).
 $trabajoId = isset($segments[2]) ? (int)$segments[2] : null;
 
@@ -74,7 +76,7 @@ $database = new Database();
 // --- Enrutamiento de Endpoints ---
 // Utiliza un switch para dirigir la solicitud al controlador o lógica adecuada
 // basándose en el endpoint identificado.
-switch ($endpoint) {
+switch ($tarea) {
     case 'trabajos':
         // Lógica para el endpoint 'trabajos' (creación, lectura, actualización, eliminación de proyectos).
 

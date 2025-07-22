@@ -1,4 +1,9 @@
 <?php
+// Configuración de errores
+    ini_set('display_errors', 0); // No mostrar errores en pantalla
+    ini_set('log_errors', 1); // Habilitar el registro de errores
+    ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
+    error_reporting(E_ALL); // Reportar todos los errores
 /**
  * data/trabajoDB.php
  *
@@ -38,11 +43,10 @@ class TrabajoDB {
         $programas_str = implode(", ", $programas_usados);
         
         // Prepara la consulta SQL para insertar un nuevo proyecto.
-        // 'ususario_id' es un error tipográfico en el nombre de la columna, debería ser 'usuario_id'.
-        $stmt = $this->db->prepare("INSERT INTO proyectos (ususario_id, titulo, descripcion, archivo, programas_usados) VALUES (?, ?, ?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO proyectos (usuario_id, titulo, descripcion, imagen, programas_usados) VALUES (?, ?, ?, ?, ?)");
         
         // Vincula los parámetros a la consulta preparada.
-        // 'i' para entero (id_usuario), 's' para cadena (titulo, descripcion, archivo, programas_str).
+        // 'i' para entero (id_usuario), 's' para cadena (titulo, descripcion, imagen, programas_str).
         $stmt->bind_param("issss", $id_usuario, $titulo, $descripcion, $archivo, $programas_str);
         
         // Ejecuta la consulta.
@@ -65,7 +69,7 @@ class TrabajoDB {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito
             FROM proyectos t
-            JOIN usuarios u ON t.ususario_id = u.id
+            JOIN usuarios u ON t.usuario_id = u.id
             LEFT JOIN likes l ON t.id = l.id_trabajo
             GROUP BY t.id
             ORDER BY t.fecha_publicacion DESC
@@ -124,7 +128,7 @@ class TrabajoDB {
         $programas_str = implode(", ", $programas_usados);
         
         // Consulta SQL para actualizar un proyecto.
-        $sql = "UPDATE proyectos SET titulo = ?, descripcion = ?, archivo = ?, programas_usados = ? WHERE id = ?";
+        $sql = "UPDATE proyectos SET titulo = ?, descripcion = ?, imagen = ?, programas_usados = ? WHERE id = ?";
         
         // Prepara la consulta.
         $stmt = $this->db->prepare($sql);
@@ -254,9 +258,9 @@ class TrabajoDB {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito
             FROM proyectos t
-            JOIN usuarios u ON t.ususario_id = u.id
+            JOIN usuarios u ON t.usuario_id = u.id
             LEFT JOIN likes l ON t.id = l.id_trabajo
-            WHERE t.ususario_id = ?
+            WHERE t.usuario_id = ?
             GROUP BY t.id
             ORDER BY t.fecha_publicacion DESC
         ";
@@ -282,9 +286,9 @@ class TrabajoDB {
         $sql = "
             SELECT t.*, u.nombre as nombre_usuario, COUNT(l.id) as favorito
             FROM proyectos t
-            JOIN usuarios u ON t.ususario_id = u.id
+            JOIN usuarios u ON t.usuario_id = u.id
             LEFT JOIN likes l ON t.id = l.id_trabajo
-            WHERE t.ususario_id != ?
+            WHERE t.usuario_id != ?
             GROUP BY t.id
             ORDER BY t.fecha_publicacion DESC
         ";

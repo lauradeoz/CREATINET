@@ -1,4 +1,9 @@
 <?php
+// Configuración de errores
+    ini_set('display_errors', 0); // No mostrar errores en pantalla
+    ini_set('log_errors', 1); // Habilitar el registro de errores
+    ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
+    error_reporting(E_ALL); // Reportar todos los errores
 /**
  * config/database.php
  *
@@ -6,13 +11,13 @@
  * Proporciona métodos para establecer la conexión, obtener la instancia de la conexión
  * y cerrar la conexión.
  */
-
+include_once('config.php');
 class Database {
     // Propiedades privadas para almacenar los detalles de la conexión a la base de datos.
-    private $host = "localhost"; // Dirección del servidor de la base de datos.
-    private $user = "root";      // Nombre de usuario para la conexión a la base de datos.
-    private $password = "";      // Contraseña para el usuario de la base de datos.
-    private $database = "creatinet"; // Nombre de la base de datos a la que conectarse.
+    private $host = DB_HOST; // Dirección del servidor de la base de datos.
+    private $user = DB_USER;      // Nombre de usuario para la conexión a la base de datos.
+    private $password = DB_PASS;      // Contraseña para el usuario de la base de datos.
+    private $database = DB_NAME; // Nombre de la base de datos a la que conectarse.
     private $conexion;           // Objeto de conexión a la base de datos (mysqli).
 
     /**

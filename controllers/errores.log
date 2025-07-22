@@ -1,0 +1,10 @@
+[21-Jul-2025 12:22:12 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: No such file or directory in /homepages/21/d4299135752/htdocs/laura/config/database.php:34
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/config/database.php(34): mysqli->__construct()
+#1 /homepages/21/d4299135752/htdocs/laura/config/database.php(24): Database->connect()
+#2 /homepages/21/d4299135752/htdocs/laura/controllers/usuarioController.php(28): Database->__construct()
+#3 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/config/database.php on line 34
+[21-Jul-2025 12:46:34 Europe/Berlin] Correo enviado exitosamente a: miguerubsk@gmail.com
+[21-Jul-2025 12:57:55 Europe/Berlin] Correo enviado exitosamente a: lauradeozdesign@gmail.com
+[21-Jul-2025 12:59:38 Europe/Berlin] Correo enviado exitosamente a: lauradeozdesign@gmail.com

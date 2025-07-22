@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const description = card.querySelector('p').textContent; // Obtiene la descripción visible.
 
             // Rellena el contenido del modal con la información del proyecto.
-            modalImage.src = image;
+            modalImage.src = 'img/trabajos/' + image.split('/').pop();
             modalTitle.textContent = title;
             modalDescription.textContent = description;
 

@@ -267,3 +267,9 @@ Stack trace:
 #1 /homepages/21/d4299135752/htdocs/laura/index.php(99): TrabajoDB->getProyectosUsuario()
 #2 {main}
   thrown in /homepages/21/d4299135752/htdocs/laura/data/trabajoDB.php on line 267
+[22-Jul-2025 10:26:51 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 't.usuario_id' in 'where clause' in C:\xampp\htdocs\CREATINET\data\trabajoDB.php:267
+Stack trace:
+#0 C:\xampp\htdocs\CREATINET\data\trabajoDB.php(267): mysqli->prepare('\n            SE...')
+#1 C:\xampp\htdocs\CREATINET\index.php(99): TrabajoDB->getProyectosUsuario(9)
+#2 {main}
+  thrown in C:\xampp\htdocs\CREATINET\data\trabajoDB.php on line 267

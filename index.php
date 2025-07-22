@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_FILES['archivo'])) {
     if ($uploadOk == 1) {
         if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
             $programas_usados = isset($_POST['programas_usados']) ? $_POST['programas_usados'] : [];
-            $trabajoDB->create($id_usuario, $titulo, $descripcion, $target_file, $programas_usados);
+            $trabajoDB->create($id_usuario, $titulo, $descripcion, $uniqueFileName, $programas_usados);
             header('Location: index.php');
             exit();
         } else {
@@ -159,7 +159,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                 <div class="trabajo-card">
                     <h3><?php echo htmlspecialchars($proyecto['titulo']); ?></h3>
                     <p>Por: <?php echo htmlspecialchars($proyecto['nombre_usuario']); ?></p>
-                    <img src="<?php echo htmlspecialchars($proyecto['archivo']); ?>" alt="<?php echo htmlspecialchars($proyecto['titulo']); ?>">
+                    <img src="img/trabajos/<?php echo htmlspecialchars($proyecto['imagen']); ?>" alt="<?php echo htmlspecialchars($proyecto['titulo']); ?>">
                     <p><?php echo htmlspecialchars($proyecto['descripcion']); ?></p>
                     <div class="programas-usados">
                         <strong>Programas Usados:</strong>
@@ -173,7 +173,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                         ?>
                     </div>
                     <div class="project-actions">
-                        <button class="edit-btn" data-id="<?php echo $proyecto['id']; ?>" data-titulo="<?php echo htmlspecialchars($proyecto['titulo']); ?>" data-descripcion="<?php echo htmlspecialchars($proyecto['descripcion']); ?>" data-archivo="<?php echo htmlspecialchars($proyecto['archivo']); ?>" data-programas="<?php echo htmlspecialchars($proyecto['programas_usados']); ?>">Editar</button>
+                        <button class="edit-btn" data-id="<?php echo $proyecto['id']; ?>" data-titulo="<?php echo htmlspecialchars($proyecto['titulo']); ?>" data-descripcion="<?php echo htmlspecialchars($proyecto['descripcion']); ?>" data-archivo="<?php echo htmlspecialchars($proyecto['imagen']); ?>" data-programas="<?php echo htmlspecialchars($proyecto['programas_usados']); ?>">Editar</button>
                         <button class="delete-btn" data-id="<?php echo $proyecto['id']; ?>">Eliminar</button>
                     </div>
                 </div>
@@ -188,7 +188,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                 <div class="trabajo-card">
                     <h3><?php echo htmlspecialchars($proyecto['titulo']); ?></h3>
                     <p>Por: <?php echo htmlspecialchars($proyecto['nombre_usuario']); ?></p>
-                    <img src="<?php echo htmlspecialchars($proyecto['archivo']); ?>" alt="<?php echo htmlspecialchars($proyecto['titulo']); ?>">
+                    <img src="img/trabajos/<?php echo htmlspecialchars($proyecto['imagen']); ?>" alt="<?php echo htmlspecialchars($proyecto['titulo']); ?>">
                     <p><?php echo htmlspecialchars($proyecto['descripcion']); ?></p>
                     <div class="programas-usados">
                         <strong>Programas Usados:</strong>

@@ -202,7 +202,7 @@ class PortfolioController {
             // Primero, se obtiene la información del trabajo existente para recuperar la ruta del archivo actual.
             $existingTrabajo = $this->trabajoDB->getById($this->trabajoId);
             if ($existingTrabajo) {
-                $archivo = $existingTrabajo['archivo']; // Usa la ruta del archivo existente.
+                $archivo = $existingTrabajo['imagen']; // Usa la ruta del archivo existente.
             }
         }
 

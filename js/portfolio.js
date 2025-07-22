@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const formData = new FormData(uploadForm); // Crea un objeto FormData con los datos del formulario.
             const trabajoId = hiddenIdInput.value; // Obtiene el ID del trabajo (vacío para nuevas subidas).
 
-            let url = '/api/index.php'; // URL por defecto para crear un nuevo trabajo.
+            let url = '/api/index.php/trabajos'; // URL para crear un nuevo trabajo.
             // let url = '/CREATINET/api/trabajos'; // URL por defecto para crear un nuevo trabajo.
             let method = 'POST'; // Método por defecto para crear.
             let headers = {}; // Cabeceras adicionales.
 
             if (trabajoId) {
                 // Si hay un ID de trabajo, es una actualización.
-                url = `/api/index.php/${trabajoId}`; // La URL incluye el ID.
+                url = `/api/index.php/trabajos/${trabajoId}`; // La URL incluye el ID.
                 // url = `/CREATINET/api/trabajos/${trabajoId}`; // La URL incluye el ID.
                 // Para simular PUT con FormData, usamos POST y el encabezado X-HTTP-Method-Override.
                 headers['X-HTTP-Method-Override'] = 'PUT';
@@ -166,11 +166,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (confirm('¿Estás seguro de que quieres eliminar este proyecto?')) { // Pide confirmación al usuario.
                 // Realiza una solicitud fetch para eliminar el proyecto.
                 // fetch(`/CREATINET/api/trabajos/${trabajoId}`, {
-                fetch(`/api/index.php/${trabajoId}`, {
-                    method: 'POST', // Se envía como POST para compatibilidad con formularios HTML.
-                    headers: {
-                        'X-HTTP-Method-Override': 'DELETE' // Se simula el método DELETE usando una cabecera.
-                    }
+                                fetch(`/api/index.php/trabajos/${trabajoId}`, {
+                    method: 'DELETE' // Se utiliza el método DELETE directamente.
                 })
                 .then(response => {
                     if (response.ok) { // Si la respuesta HTTP es exitosa (2xx).
@@ -224,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Muestra la imagen actual si existe y ajusta el campo de archivo.
             if (archivo && currentProjectImage && currentImageContainer && fileInput) {
-                currentProjectImage.src = archivo; // Establece la fuente de la imagen.
+                currentProjectImage.src = 'img/trabajos/' + archivo; // Construye la ruta completa de la imagen.
                 currentImageContainer.style.display = 'block'; // Muestra el contenedor de la imagen.
                 fileInput.removeAttribute('required'); // El campo de archivo no es requerido si ya hay una imagen.
             } else if (currentImageContainer && fileInput) {

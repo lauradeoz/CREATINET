@@ -131,7 +131,7 @@ class PortfolioController {
             $target_file = $target_dir . $uniqueFileName;
 
             if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
-                $archivo = $target_file;
+                $archivo = $uniqueFileName;
             } else {
                 $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';
                 $response['body'] = json_encode(['success' => false, 'error' => 'Error al subir el archivo.']);
@@ -190,7 +190,7 @@ class PortfolioController {
 
             // Mueve el archivo subido al directorio de destino.
             if (move_uploaded_file($_FILES["archivo"]["tmp_name"], $target_file)) {
-                $archivo = $target_file; // Almacena la nueva ruta del archivo.
+                $archivo = $uniqueFileName; // Almacena solo el nombre del nuevo archivo.
             } else {
                 // Si falla la subida, devuelve un error.
                 $response['status_code_header'] = 'HTTP/1.1 500 Internal Server Error';

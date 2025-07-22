@@ -29,46 +29,43 @@ require_once __DIR__ . '/../config/database.php'; // Configuración de la base d
 require_once '../data/trabajoDB.php'; // Clase para interactuar con la tabla de trabajos.
 require_once __DIR__ . '/../controllers/portfolioController.php'; // Controlador para la lógica de negocio de trabajos.
 
-// --- Lógica de Enrutamiento ---
+// --- Lógica de Enrutamiento Dinámico ---
 
-// Obtiene la URI de la solicitud (la parte de la URL después del dominio).
-$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-// Obtiene el método HTTP de la solicitud (GET, POST, PUT, DELETE, etc.).
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-
-// Verifica si existe una cabecera 'X-HTTP-Method-Override'.
-// Esta cabecera se usa comúnmente para simular métodos PUT o DELETE
-// cuando el cliente (ej. un formulario HTML) solo puede enviar POST.
 if (isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'])) {
     $requestMethod = strtoupper($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']);
-    error_log("DEBUG: X-HTTP-Method-Override detectado. Método ajustado a: " . $requestMethod);
-}
-error_log("DEBUG: Método de solicitud final para API: " . $requestMethod);
-
-// Elimina el prefijo del directorio base de la URI si existe.
-// Esto es necesario si la aplicación no está en la raíz del servidor web.
-$basePath = ''; // Debe coincidir con RewriteBase en .htaccess.
-// $basePath = '/CREATINET/'; // Debe coincidir con RewriteBase en .htaccess.
-if (strpos($requestUri, $basePath) === 0) {
-    $requestUri = substr($requestUri, strlen($basePath));
 }
 
-// Divide la URI en segmentos para identificar el endpoint y los parámetros.
-// Ejemplo: /api/trabajos/123 -> ['api', 'trabajos', '123']
-$segments = explode('/', trim($requestUri, '/'));
+// Obtiene la URI de la solicitud sin la query string.
+$requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Obtiene la ruta del script actual (ej. /api/index.php o /CREATINET/api/index.php)
+$scriptName = $_SERVER['SCRIPT_NAME'];
 
-// El primer segmento debe ser 'api' para que sea una solicitud válida a la API.
-if (empty($segments[0]) || $segments[0] !== 'api') {
+// Calcula la ruta de la API que viene después del script.
+$apiRoute = '';
+if (strpos($requestUri, $scriptName) === 0) {
+    // Caso: la URL incluye el nombre del script, ej: /api/index.php/trabajos/1
+    $apiRoute = substr($requestUri, strlen($scriptName));
+} else {
+    // Caso: la URL es reescrita y no incluye index.php, ej: /api/trabajos/1
+    $basePath = dirname($scriptName);
+    if ($basePath !== '/' && $basePath !== '') {
+        $apiRoute = substr($requestUri, strlen($basePath));
+    } else {
+        $apiRoute = $requestUri;
+    }
+}
+
+$segments = explode('/', trim($apiRoute, '/'));
+
+$endpoint = $segments[0] ?? null;
+$trabajoId = isset($segments[1]) ? (int)$segments[1] : null;
+
+if (empty($endpoint)) {
     header('HTTP/1.1 404 Not Found');
-    echo json_encode(['success' => false, 'error' => 'Endpoint de API no encontrado']);
+    echo json_encode(['success' => false, 'error' => 'Endpoint de API no especificado.']);
     exit();
 }
-
-// El segundo segmento es el nombre del endpoint (ej. 'trabajos', 'like').
-$endpoint = isset($segments[1]) ? $segments[1] : null;
-$tarea = isset($_POST['trabajos']) ? 'trabajos' : null;
-// El tercer segmento (si existe) es el ID de un recurso (ej. ID de trabajo).
-$trabajoId = isset($segments[2]) ? (int)$segments[2] : null;
 
 // Instancia la conexión a la base de datos.
 $database = new Database();
@@ -76,7 +73,7 @@ $database = new Database();
 // --- Enrutamiento de Endpoints ---
 // Utiliza un switch para dirigir la solicitud al controlador o lógica adecuada
 // basándose en el endpoint identificado.
-switch ($tarea) {
+switch ($endpoint) {
     case 'trabajos':
         // Lógica para el endpoint 'trabajos' (creación, lectura, actualización, eliminación de proyectos).
 

@@ -26,7 +26,7 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 
 // Inclusión de archivos necesarios para la funcionalidad de la API.
 require_once __DIR__ . '/../config/database.php'; // Configuración de la base de datos.
-require_once '../data/trabajoDB.php'; // Clase para interactuar con la tabla de trabajos.
+require_once __DIR__ . '/../data/trabajoDB.php'; // Clase para interactuar con la tabla de trabajos.
 require_once __DIR__ . '/../controllers/portfolioController.php'; // Controlador para la lógica de negocio de trabajos.
 
 // --- Lógica de Enrutamiento Dinámico ---

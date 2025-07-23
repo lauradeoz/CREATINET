@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const likesCountSpan = this.nextElementSibling; // Obtiene el elemento span que muestra el contador de likes.
 
             // Realiza una solicitud POST a la API para registrar/quitar un "me gusta".
-            fetch('/CREATINET/api/like.php', {
+            fetch('/api/like.php', {
             // fetch('/api/like.php', {
                 method: 'POST', // Método HTTP POST.
                 headers: {

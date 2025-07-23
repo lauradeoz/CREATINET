@@ -273,3 +273,128 @@ Stack trace:
 #1 C:\xampp\htdocs\CREATINET\index.php(99): TrabajoDB->getProyectosUsuario(9)
 #2 {main}
   thrown in C:\xampp\htdocs\CREATINET\data\trabajoDB.php on line 267
+[23-Jul-2025 10:21:56 Europe/Berlin] PHP Warning:  Undefined array key "usuario_nick" in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:21:56 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:22:05 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:22:09 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:23:30 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:23:31 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:25:45 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:25:49 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:31:16 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(21): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:32:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:32:43 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:32:51 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:33:46 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(21): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:35:32 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:36:04 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:36:04 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:36:04 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:36:09 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(21): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:36:25 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:39:46 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(21): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:39:49 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:40:10 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:40:23 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(21): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:41:19 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:41:21 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:41:23 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:38 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:39 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:39 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:39 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:39 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:42:43 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:43:59 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:00 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:00 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:00 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:01 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:03 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:04 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:44:05 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:45:12 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:45:57 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:45:57 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:46:00 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:46:02 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:46:08 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:47:25 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:47:31 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:47:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Table 'dbs14399138.trabajos' doesn't exist in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php:491
+Stack trace:
+#0 /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php(491): mysqli->prepare()
+#1 /homepages/21/d4299135752/htdocs/laura/perfil.php(25): UsuarioDB->getProfileByNick()
+#2 {main}
+  thrown in /homepages/21/d4299135752/htdocs/laura/data/ususarioDB.php on line 491
+[23-Jul-2025 10:47:38 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:47:40 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:47:47 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 115
+[23-Jul-2025 10:50:01 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:02 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:04 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:06 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:18 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:20 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:21 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:27 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:28 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:29 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:30 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:50:31 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 121
+[23-Jul-2025 10:53:53 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:53 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:53 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:54 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:54 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:55 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:55 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:55 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:55 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:55 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:55 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:53:59 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:53:59 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:53:59 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137
+[23-Jul-2025 10:54:02 Europe/Berlin] DEBUG: Request URI después de basePath: /index.php
+[23-Jul-2025 10:54:02 Europe/Berlin] DEBUG: Enrutando a index.php (principal).
+[23-Jul-2025 10:54:02 Europe/Berlin] PHP Deprecated:  htmlspecialchars(): Passing null to parameter #1 ($string) of type string is deprecated in /homepages/21/d4299135752/htdocs/laura/index.php on line 137

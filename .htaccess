@@ -9,7 +9,7 @@ RewriteEngine On
 # Define la base de la URL para las reglas de reescritura.
 # Es la ruta relativa desde la raíz del servidor web hasta el directorio de tu proyecto.
 # Asegúrate de que coincida con la configuración de tu servidor (ej. si está en un subdirectorio).
-RewriteBase /CREATINET/
+RewriteBase /laura/
 
 # --- Reglas de reescritura ---
 # Estas reglas se aplican a todas las solicitudes que no corresponden a archivos o directorios reales.

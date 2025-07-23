@@ -464,4 +464,110 @@ public function restablecerPassword($token, $nueva_password){
     public function generarToken(){
         return bin2hex(random_bytes(32)); // Genera 32 bytes aleatorios y los convierte a hexadecimal.
     }
+
+    /**
+     * Obtiene el perfil público de un usuario por su nick.
+     *
+     * @param string $nick Nick del usuario.
+     * @return array|null Datos del perfil y sus trabajos, o null si no se encuentra.
+     */
+    public function getProfileByNick($nick){
+        // Obtener los datos del usuario
+        $sql_user = "SELECT id, nombre_completo, nick, foto_perfil, biografia, especialidades, sitio_web FROM {$this->table} WHERE nick = ?";
+        $stmt_user = $this->db->prepare($sql_user);
+        if(!$stmt_user) return null;
+
+        $stmt_user->bind_param("s", $nick);
+        $stmt_user->execute();
+        $result_user = $stmt_user->get_result();
+
+        if($result_user->num_rows === 0) return null;
+
+        $perfil = $result_user->fetch_assoc();
+        $stmt_user->close();
+
+        // Obtener los trabajos del usuario
+        $sql_trabajos = "SELECT * FROM trabajos WHERE id_usuario = ? ORDER BY fecha_subida DESC";
+        $stmt_trabajos = $this->db->prepare($sql_trabajos);
+        if(!$stmt_trabajos) return $perfil; // Devuelve el perfil sin trabajos si la consulta falla
+
+        $stmt_trabajos->bind_param("i", $perfil['id']);
+        $stmt_trabajos->execute();
+        $result_trabajos = $stmt_trabajos->get_result();
+        
+        $perfil['trabajos'] = [];
+        while($trabajo = $result_trabajos->fetch_assoc()){
+            $perfil['trabajos'][] = $trabajo;
+        }
+        $stmt_trabajos->close();
+
+        return $perfil;
+    }
+
+    /**
+     * Actualiza el perfil de un usuario, incluyendo la foto.
+     *
+     * @param int $id ID del usuario.
+     * @param array $data Datos del formulario (nombre_completo, nick, etc.).
+     * @param array|null $file Datos del archivo de la foto de perfil (de $_FILES).
+     * @return array Resultado de la operación (success, mensaje).
+     */
+    public function updateProfile($id, $data, $file = null){
+        // 1. Actualizar la foto de perfil si se subió una nueva
+        $foto_perfil_nombre = $this->getById($id)['foto_perfil']; // Obtener nombre de foto actual
+
+        if ($file && $file['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = $_SERVER['DOCUMENT_ROOT'] . '/laura/img/perfiles/';
+            
+            // Asegurarse de que el directorio existe y tiene permisos de escritura
+            if (!is_dir($upload_dir)) {
+                if (!mkdir($upload_dir, 0755, true)) {
+                    return ['success' => false, 'mensaje' => 'Error interno: No se pudo crear el directorio para las fotos de perfil.'];
+                }
+            }
+            
+            if (!is_writable($upload_dir)) {
+                return ['success' => false, 'mensaje' => 'Error interno: El servidor no tiene permisos para guardar la foto de perfil.'];
+            }
+
+            $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+            $foto_perfil_nombre = uniqid('perfil_') . '.' . $extension;
+            $upload_path = $upload_dir . $foto_perfil_nombre;
+
+            if (!move_uploaded_file($file['tmp_name'], $upload_path)) {
+                return ['success' => false, 'mensaje' => 'Error al mover la foto de perfil. Verifica los permisos del directorio img/perfiles/.'];
+            }
+        }
+
+        // 2. Actualizar los datos de texto en la base de datos
+        $sql = "UPDATE {$this->table} SET nombre_completo = ?, nick = ?, biografia = ?, especialidades = ?, sitio_web = ?, foto_perfil = ? WHERE id = ?";
+        $stmt = $this->db->prepare($sql);
+
+        if(!$stmt){
+            return ['success' => false, 'mensaje' => 'Error al preparar la consulta de actualización.'];
+        }
+
+        $stmt->bind_param("ssssssi", 
+            $data['nombre_completo'],
+            $data['nick'],
+            $data['biografia'],
+            $data['especialidades'],
+            $data['sitio_web'],
+            $foto_perfil_nombre,
+            $id
+        );
+
+        if ($stmt->execute()) {
+            $stmt->close();
+            return ['success' => true, 'mensaje' => 'Perfil actualizado con éxito.'];
+        } else {
+            // Manejo de error para nick duplicado
+            if ($this->db->errno === 1062) { // 1062 es el código de error para entrada duplicada
+                return ['success' => false, 'mensaje' => 'El nick "' . $data['nick'] . '" ya está en uso. Por favor, elige otro.'];
+            }
+            $error_msg = $stmt->error;
+            $stmt->close();
+            return ['success' => false, 'mensaje' => 'Error al actualizar el perfil: ' . $error_msg];
+        }
+    }
 }

@@ -6,3 +6,4 @@ Stack trace:
 [22-Jul-2025 19:39:30 Europe/Berlin] DEBUG: PortfolioController instanciado con requestMethod: PUT
 [22-Jul-2025 19:39:30 Europe/Berlin] DEBUG: Filas afectadas por UPDATE: 1
 [23-Jul-2025 09:06:44 Europe/Berlin] DEBUG: PortfolioController instanciado con requestMethod: POST
+[23-Jul-2025 10:12:38 Europe/Berlin] DEBUG: PortfolioController instanciado con requestMethod: POST

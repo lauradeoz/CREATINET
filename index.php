@@ -10,7 +10,7 @@
 
 // Obtener la URI de la solicitud
 $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$basePath = '/CREATINET/'; // Asegúrate de que esto coincida con tu RewriteBase en .htaccess
+$basePath = '/laura/'; // Asegúrate de que esto coincida con tu RewriteBase en .htaccess
 
 // Eliminar el prefijo del directorio base si existe
 if (strpos($requestUri, $basePath) === 0) {
@@ -110,7 +110,10 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
 </head>
 <body>
     <div id="user-info-top-right">
-        <p><strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></strong> | <a href="logout.php" class="btn-logout"><strong>Cerrar sesión</strong></a></p>
+        <p>
+            <strong>Bienvenido, <?php echo htmlspecialchars($_SESSION['usuario_nombre']); ?></strong> | 
+            <a href="logout.php" class="btn-logout"><strong>Cerrar sesión</strong></a>
+        </p>
     </div>
     <div class="container">
         <img src="img/LOGO_CREATINET.png" alt="Logo Creatinet" style="display: block; margin: 0 auto 20px auto; max-width: 150px;">

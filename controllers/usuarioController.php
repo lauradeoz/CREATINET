@@ -5,6 +5,9 @@
     ini_set('log_errors', 1); // Habilitar el registro de errores
     ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
     error_reporting(E_ALL); // Reportar todos los errores
+    ini_set('log_errors', 1); // Habilitar el registro de errores
+    ini_set('error_log', 'errores.log'); // Guardar errores en un archivo llamado errores.log
+    error_reporting(E_ALL); // Reportar todos los errores
 /**
  * controllers/usuarioController.php
  *
@@ -50,6 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'
         // Si el login es exitoso, guarda el ID y el nombre del usuario en la sesión.
         $_SESSION['usuario_id'] = $resultado['usuario']['id'];
         $_SESSION['usuario_nombre'] = $resultado['usuario']['nombre'];
+        $_SESSION['usuario_nick'] = $resultado['usuario']['nick']; // <-- Añadido
         $ruta = '../index.php'; // Redirige a la página principal.
     } else {
         $ruta = '../login.php'; // Si falla, redirige de nuevo a la página de login.
@@ -94,6 +98,44 @@ if($_SERVER['REQUEST_METHOD'] == "POST"
     // Redirige al usuario a la página de login con un mensaje.
     redirigirConMensaje('../login.php', $resultado['success'], $resultado['mensaje']);
 
+}
+
+// --- Lógica para la Actualización de Perfil ---
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['editar_perfil'])) {
+    // 1. Verificar que el usuario está logueado
+    if (!isset($_SESSION['usuario_id'])) {
+        redirigirConMensaje('../login.php', false, 'Debes iniciar sesión para editar tu perfil.');
+    }
+
+    $id_usuario = $_SESSION['usuario_id'];
+
+    // 2. Recoger los datos del formulario
+    $datos_perfil = [
+        'nombre_completo' => $_POST['nombre_completo'] ?? '',
+        'nick'            => $_POST['nick'] ?? '',
+        'biografia'       => $_POST['biografia'] ?? '',
+        'especialidades'  => $_POST['especialidades'] ?? '',
+        'sitio_web'       => $_POST['sitio_web'] ?? ''
+    ];
+
+    // 3. Gestionar la subida de la foto de perfil
+    $foto_perfil_file = null;
+    if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+        $foto_perfil_file = $_FILES['foto_perfil'];
+    }
+
+    // 4. Llamar al método de la base de datos para actualizar
+    $resultado = $usuariodb->updateProfile($id_usuario, $datos_perfil, $foto_perfil_file);
+
+    // 5. Redirigir con el resultado
+    // Si el nick se actualizó correctamente, redirigimos a la nueva URL del perfil
+    if ($resultado['success']) {
+        $nick = $datos_perfil['nick'];
+        redirigirConMensaje("../perfil.php?nick=$nick", true, $resultado['mensaje']);
+    } else {
+        // Si hay un error, redirigimos de vuelta al formulario de edición
+        redirigirConMensaje('../editar_perfil.php', false, $resultado['mensaje']);
+    }
 }
 
 /**

@@ -49,6 +49,8 @@ if(isset($_GET['token'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificación de cuenta</title>
+    <link rel="icon" href="img/LOGO_CREATINET.png" type="image/png">
+
     <!-- Enlace a la hoja de estilos CSS para el login (reutilizada para esta página) -->
     <link rel="stylesheet" href="css/login.css">
 </head>

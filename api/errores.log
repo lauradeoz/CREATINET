@@ -3,3 +3,6 @@
 Stack trace:
 #0 {main}
   thrown in /homepages/21/d4299135752/htdocs/laura/api/index.php on line 29
+[22-Jul-2025 19:39:30 Europe/Berlin] DEBUG: PortfolioController instanciado con requestMethod: PUT
+[22-Jul-2025 19:39:30 Europe/Berlin] DEBUG: Filas afectadas por UPDATE: 1
+[23-Jul-2025 09:06:44 Europe/Berlin] DEBUG: PortfolioController instanciado con requestMethod: POST

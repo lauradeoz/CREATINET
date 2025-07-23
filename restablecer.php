@@ -52,6 +52,8 @@ if(isset($_GET['token'])){
     <title>Restablecer Contraseña</title>
     <!-- Enlace a la hoja de estilos CSS para el login (reutilizada para esta página) -->
     <link rel="stylesheet" href="css/login.css">
+    <link rel="icon" href="img/LOGO_CREATINET.png" type="image/png">
+
 </head>
 <body>
     <!-- Contenedor principal de la página -->

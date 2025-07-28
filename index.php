@@ -235,6 +235,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
                     <li><a href="login.php">Login</a></li>
                     <li><a href="privacidad.html">Privacidad</a></li>
                     <li><a href="terminos.html">Términos</a></li>
+                    <li><a href="img/MANUAL-DEL-USUARIO.pdf" download>Manual del Usuario</a></li>
                 </ul>
             </div>
             <div class="footer-section social">

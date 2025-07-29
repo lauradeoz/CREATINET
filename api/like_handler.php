@@ -13,15 +13,15 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Simulación de login para pruebas (puedes cambiar esto por tu sistema real)
-if (!isset($_SESSION['id_usuario'])) {
-    // En un sistema real, aquí devolverías un error si el usuario no está logueado.
-    // Para la prueba, asignamos un usuario fijo.
-    $_SESSION['id_usuario'] = 1; 
+// --- Verificación de sesión de usuario ---
+if (!isset($_SESSION['usuario_id'])) {
+    // Si el usuario no está logueado, se devuelve un error.
+    echo json_encode(['success' => false, 'error' => 'Usuario no autenticado.']);
+    exit;
 }
 
 // --- Obtener datos de la solicitud ---
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['usuario_id'];
 $input = json_decode(file_get_contents('php://input'), true);
 $id_trabajo = isset($input['id_trabajo']) ? (int)$input['id_trabajo'] : 0;
 

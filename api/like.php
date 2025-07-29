@@ -10,11 +10,12 @@ header('Content-Type: application/json');
 session_start();
 
 // Simular login (si no tenés login real)
-if (!isset($_SESSION['id_usuario'])) {
-    $_SESSION['id_usuario'] = 1; // Usuario fijo para pruebas
+if (!isset($_SESSION['usuario_id'])) {
+    echo json_encode(['success' => false, 'error' => 'Usuario no autenticado.']);
+    exit;
 }
 
-$id_usuario = $_SESSION['id_usuario'];
+$id_usuario = $_SESSION['usuario_id'];
 $data = json_decode(file_get_contents("php://input"), true);
 $id_trabajo = intval($data['id_trabajo'] ?? 0);
 

@@ -115,6 +115,7 @@ $proyectosOtros = $trabajoDB->getProyectosOtros($_SESSION['usuario_id']);
             <a href="logout.php" class="btn-logout"><strong>Cerrar sesión</strong></a>
         </p>
     </div>
+    
     <div class="container">
         <img src="img/LOGO_CREATINET.png" alt="Logo Creatinet" style="display: block; margin: 0 auto 20px auto; max-width: 150px;">
         <h1>Portfolio de Creadores</h1>
